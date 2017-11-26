@@ -1,0 +1,10 @@
+<div *ngIf="user">
+  <h2><strong>Add your opinion </strong></h2>
+
+  <form (submit)="onOpinionSubmit(); opinionForm.reset()" #opinionForm="ngForm">
+    <div class="form-group">
+      <textarea class="form-control" [(ngModel)]="opinionText" name="opinionText" maxlength="140" rows="4" required></textarea>
+      <button class="btn btn-outline-primary my-2" [disabled]="opinionForm.invalid" style="width:100%;" type="submit">Add opinion!</button>
+    </div>
+  </form>
+</div>

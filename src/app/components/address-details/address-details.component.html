@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="col-md-10 offset-md-1 p-4">
+    <h1 class="text-center">
+      <a [routerLink]="['/shopping-cart']">
+            <button class="btn btn-outline-primary float-left" type="submit">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i> &ensp;Back 
+          </button>
+           </a> Delivery address
+      <a [routerLink]="['/address-details']">
+            <button class="btn btn-outline-primary float-right" (click)="submitAddress()" [disabled]="addressForm.invalid" type="submit">
+            Next &ensp; <i class="fa fa-arrow-right" aria-hidden="true"></i>
+          </button>
+      </a>
+    </h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-5 offset-md-1">
+    <h3>New address</h3>
+    <form #addressForm="ngForm">
+      <div class="form-group">
+        <label>Address</label>
+        <input class="form-control" [(ngModel)]="address" name="address" maxlength="30" type="text" required>
+      </div>
+      <div class="form-group">
+        <label>Postal Code</label>
+        <input class="form-control" [(ngModel)]="postalCode" name="postalCode" maxlength="10" type="text" required>
+      </div>
+      <div class="form-group">
+        <label>City</label>
+        <input class="form-control" [(ngModel)]="city" name="city" maxlength="30" type="text" required>
+      </div>
+      <div class="form-group">
+        <label>Country</label>
+        <input class="form-control" [(ngModel)]="country" name="country" maxlength="30" type="text" required>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-5">
+    <h3>Previously used addresses</h3>
+    <table class="table table-hover ">
+      <tbody>
+         <tr *ngFor="let fullAddress of user.addressList;let i = index" >
+          <td (click)="setAddress(i)">
+            <h5><strong>{{fullAddress.postalCode}}, {{fullAddress.city}}</strong> </h5>
+            <h5>{{fullAddress.address}}</h5>
+          </td>
+        </tr> 
+      </tbody>
+    </table>
+  </div>
+  <div class="offset-md-1">
+  </div>
+</div>

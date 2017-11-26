@@ -1,0 +1,55 @@
+<div *ngIf="item">
+  <div class="row">
+    <div class="col-md-1 my-3  hidden-md">
+      <img *ngFor="let img of item.imgs" class="item-img  my-2" src="{{img}}">
+    </div>
+
+    <div class="col-md-5 my-3">
+      <img class="item-img my-2" src="{{item.imgs[0]}}">
+    </div>
+
+    <div class="col-md-5 offset-md-1 my-5">
+      <h3><strong>{{item.brand}}</strong></h3>
+      <h5>{{item.name}}</h5>
+      <h2><strong>{{item.price | currency:'PLN '}} </strong></h2>
+
+      <form (submit)="addToCart(sizeSelect.value); buyForm.reset()" #buyForm="ngForm">
+        <div class="form-group">
+
+          <h3 *ngIf="sizeSelect.dirty && available > 0">Available in stock: {{available}}</h3>
+          <h3 *ngIf="sizeSelect.dirty && available == 0">This size is unavailable</h3>
+          <h3 *ngIf="!sizeSelect.dirty">Choose size</h3>
+
+          <select class="form-control" #sizeSelect="ngModel" (change)="onSizeSelect(sizeSelect.value)" [(ngModel)]="sizeSelected" name="sizeSelected"
+            required>
+        <option *ngFor="let size of item.sizes; let i = index" [value]="i">{{size.size}}</option>
+      </select>
+          <button *ngIf="authService.loggedIn()" class="btn btn-outline-primary my-2" [disabled]="buyForm.invalid || available == 0"
+            style="width:100%;" type="submit">Add to cart</button>
+          <h3 class="my-3 " *ngIf="!authService.loggedIn()">Log in to continue shopping</h3>
+        </div>
+      </form>
+
+      <h2><strong>Details</strong></h2>
+      <h5 *ngFor="let detail of item.details">{{detail}}</h5>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5 offset-md-1">
+      <h2><strong>Opinions ({{item.opinions.length}})</strong></h2>
+      <h4 *ngIf="item.opinions.length == 0">There are no reviews for this product yet</h4>
+
+      <div *ngFor="let opinion of item.opinions; let i = index">
+        <h1 class="float-right" *ngIf="authService.loggedIn() && (opinion.user_id == user_id)" (click)="opinionDelete(i)">
+          <a> <i class="fa fa-remove" aria-hidden="true"></i></a>
+        </h1>
+        <h6><strong>{{opinion.name}} </strong> </h6>
+        <p>{{opinion.opinionText}}</p>
+      </div>
+    </div>
+    <div class="col-md-5 offset-md-1">
+      <app-item-opinions (onOpinionAdded)="onOpinionAdded($event)"></app-item-opinions>
+    </div>
+  </div>
+</div>

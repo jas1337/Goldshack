@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-md-6 offset-md-3 p-4">
+    <h1 class="text-center">Welcome to GoldShack!</h1>
+    <hr class="featurette-divider">
+    <form (submit)="onRegisterSubmit()" #registerForm="ngForm">
+      <div class="form-group">
+        <label>First name</label>
+        <input class="form-control" [(ngModel)]="firstName" name="firstName" type="text" required>
+      </div>
+      <div class="form-group">
+        <label>Last name</label>
+        <input class="form-control" [(ngModel)]="lastName" name="lastName" type="text" required>
+      </div>
+      <div class="form-group">
+        <label>Email address</label>
+        <input class="form-control" [(ngModel)]="email" name="email" type="email" required>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input class="form-control" [(ngModel)]="password" name="password" type="password" required>
+        <small class="form-text text-muted">Please enter at least 6 characters.</small>
+      </div>
+      <div class="form-group">
+        <label>Confirm password</label>
+        <input class="form-control " [(ngModel)]="confirmPassword" name="confirmPassword" type="password" required>
+      </div>
+      <div class="form-group">
+        <small class="form-text text-muted my-4">
+          <input class="" type="checkbox" style="width:20px;height:20px;" required> Click here to indicate that you have read and
+          agree to the terms presented in the Terms and Conditions agreement.
+        </small>
+        <button class="btn btn-outline-primary " style="width:100%;" type="submit" [disabled]="registerForm.invalid">Register</button>
+
+      </div>
+    </form>
+  </div>
+</div>

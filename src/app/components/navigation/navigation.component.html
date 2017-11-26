@@ -1,0 +1,68 @@
+<div class="row">
+
+  <div class="col-md-5">
+    <a class="navbar-brand" href="#">
+      <h2>GoldShack</h2>
+    </a>
+  </div>
+
+  <div class="col-md-7 ">
+    <form class="form-inline my-2 float-right" #loginForm="ngForm" (submit)="onLoginSubmit()">
+      <input class="form-control mr-sm-2" *ngIf="!authService.loggedIn()" [(ngModel)]="email" name="email" type="text" placeholder="Email"
+        required>
+      <input class="form-control mr-sm-2" *ngIf="!authService.loggedIn()" [(ngModel)]="password" name="password" type="password"
+        placeholder="Password" required>
+      <button class="btn btn-outline-primary my-2 " *ngIf="!authService.loggedIn()" type="submit" [disabled]="loginForm.invalid">Log in</button>
+      <a class="mx-2" href="#" *ngIf="!authService.loggedIn()" href="/registration">
+        <h1>
+          <i class="fa fa-user-plus" aria-hidden="true"></i>
+        </h1>
+      </a>
+
+      <a href="#" [routerLink]="['/shopping-cart']" *ngIf="authService.loggedIn()" routerLink='/'>
+        <h1>
+          <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+        </h1>
+      </a>
+      <a class="mx-2" href="#" [routerLink]="['/profile']" *ngIf="authService.loggedIn()" >
+        <h1>
+          <i class="fa fa-user" aria-hidden="true"></i>
+        </h1>
+      </a>
+      <button class="btn btn-outline-primary my-2 " *ngIf="authService.loggedIn()" (click)="onLogoutClick()" type="submit">Log out</button>
+
+    </form>
+
+  </div>
+</div>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+  <button [ngClass]="{'collapsed':isCollapsed == true}" class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div [ngClass]="{'show': isCollapsed == false}" class="collapse navbar-collapse" id="navbarColor02">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" href="#" [routerLink]="['/category', 'clothing']">Clothing</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" href="#" [routerLink]="['/category', 'footwear']">Footwear</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" href="#" [routerLink]="['/category', 'sport']">Sport</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" href="#" [routerLink]="['/category', 'accesories']">Accessories</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" href="#" [routerLink]="['/category', 'sale']" style="color:red">Sale!</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search">
+      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
