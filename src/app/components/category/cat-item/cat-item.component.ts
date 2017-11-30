@@ -29,8 +29,6 @@ export class CatItemComponent implements OnInit {
     }
   }
 
-
-
   constructor(
     private galleryService: GalleryService,
     private authService: AuthService,
@@ -43,12 +41,15 @@ export class CatItemComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.switchMap((params: Params) => this.galleryService.getItemById(params['_id']))
       .subscribe(item => {
-        this.item = item;
-        if (this.item == undefined) {
+        if (item.notFound)
           this.router.navigate(['/404']);
-        }
+        else
+          this.item = item;
+      },
+      err => {
+        console.log(err);
+        return false;
       });
-
     if (this.authService.loggedIn()) {
       this.authService.getProfile().subscribe(profile => {
         this.user = profile.user;
@@ -66,7 +67,6 @@ export class CatItemComponent implements OnInit {
     this.galleryService.getItemById(this.item._id)
       .subscribe(item => {
         this.available = item.sizes[sizeSelected].available;
-
         if (this.available > 0) {
           let itemAdded = {
             _id: this.item._id,
@@ -82,7 +82,7 @@ export class CatItemComponent implements OnInit {
             .subscribe(data => data)
           this.flashMessagesService.show('Item added to cart', { cssClass: 'alert-success', timeout: 1500 });
         } else {
-          this.flashMessagesService.show('Sorry, the product has run out ', { cssClass: 'alert-danger', timeout: 1500 });
+          this.flashMessagesService.show('Sorry, the product has run out', { cssClass: 'alert-danger', timeout: 1500 });
         }
       })
 

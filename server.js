@@ -16,7 +16,7 @@ const port = 3000;
 const app = express();
 const users = require('./routes/users');
 const items = require('./routes/items');
-// const carts = require('./routes/carts');
+const orders = require('./routes/orders');
 
 // GalleryItem = require('./models/galleryItem');
 
@@ -24,16 +24,16 @@ const items = require('./routes/items');
 mongoose.connect(config.database);
 //Log on connection
 mongoose.connection.on('connected', () => {
-    console.log('Connected to database :' + config.database);
+  console.log('Connected to database :' + config.database);
 });
 //Log on error
 mongoose.connection.on('error', (err) => {
-    console.log('Database error :' + err);
+  console.log('Database error :' + err);
 });
 
 
 //Static folder for client-side files
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/src/assets')));
 
 //Use CORS Middleware. Allows communication to API from different Port
 app.use(cors());
@@ -51,6 +51,7 @@ require('./config/passport')(passport);
 
 app.use('/users', users);
 app.use('/items', items);
+app.use('/orders', orders);
 
 // app.get('*', (req, res) => {
 //     res.sendFile(path.join(__dirname, 'public/index.html'));

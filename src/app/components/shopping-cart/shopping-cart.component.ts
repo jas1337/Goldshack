@@ -13,8 +13,8 @@ import { ShoppingService } from '../../shared/services/shopping.service';
 })
 export class ShoppingCartComponent implements OnInit {
 
-  user: Object = {};
-  shoppingCart: any = ["foobar"];
+  user: Object;
+  shoppingCart: any;
 
   constructor(
     private authService: AuthService,
@@ -28,7 +28,6 @@ export class ShoppingCartComponent implements OnInit {
       this.authService.getProfile().subscribe(profile => {
         this.user = profile.user;
         this.shoppingCart = profile.user.shoppingCart;
-        // console.log(this.shoppingCart)
       },
         err => {
           console.log(err);

@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-const config = require('../config/database');
 
 // User Schema
 const UserSchema = mongoose.Schema({
@@ -22,10 +21,6 @@ const UserSchema = mongoose.Schema({
     type: Boolean,
     default: false
   },
-  lastAddress: {
-    type: Array,
-    default: []
-  },
   shoppingCart: {
     type: Array,
     default: []
@@ -42,12 +37,10 @@ const UserSchema = mongoose.Schema({
 
 const User = module.exports = mongoose.model('User', UserSchema);
 
-module.exports.getUserById = function (id, callback) {
-  User.findById(id, callback);
-}
-
 module.exports.getUserByEmail = function (email, callback) {
-  const query = { email: email }
+  const query = {
+    email: email
+  }
   User.findOne(query, callback);
 }
 

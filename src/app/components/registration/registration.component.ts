@@ -33,8 +33,6 @@ export class RegistrationComponent implements OnInit {
       this.router.navigate(['/']);
     }
   }
-
-
   onRegisterSubmit() {
 
     //Creates new user based on form data
@@ -67,16 +65,13 @@ export class RegistrationComponent implements OnInit {
     // Register user
     this.authService.registerUser(user).subscribe(data => {
       if (data.success) {
-        this.flashMessagesService.show('You are now registered and can log in', { cssClass: 'alert-success', timeout: 1500 });
+        this.flashMessagesService.show(data.msg, { cssClass: 'alert-success', timeout: 1500 });
         this.router.navigate(['/']);
       } else {
-        this.flashMessagesService.show('Something went wrong', { cssClass: 'alert-danger', timeout: 1500 });
-        this.router.navigate(['/register']);
+        this.flashMessagesService.show(data.msg, { cssClass: 'alert-danger', timeout: 1500 });
+        // this.router.navigate(['/register']);
       }
     });
-
-    // this.registerForm.resetForm();
-
   }
 
 }

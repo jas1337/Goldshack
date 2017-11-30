@@ -36,17 +36,17 @@ export class ShoppingService {
       .map(res => res.json());
   }
 
-  //updates user.addressList - data from form in address-details
-  setLastAddress(user: any, lastAddress: any) {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
+  // //updates user.addressList - data from form in address-details
+  // setLastAddress(user: any, lastAddress: any) {
+  //   let headers = new Headers();
+  //   headers.append('Content-Type', 'application/json');
 
-    // user.lastAddress.push(lastAddress.address) ;
-    user.lastAddress[0] = lastAddress;
-    console.log(user)
-    return this.http.put('http://localhost:3000/users/setLastAddress/' + user.id, user, { headers: headers })
-      .map(res => res.json());
-  }
+  //   // user.lastAddress.push(lastAddress.address) ;
+  //   user.lastAddress[0] = lastAddress;
+  //   console.log(user)
+  //   return this.http.put('http://localhost:3000/users/setLastAddress/' + user.id, user, { headers: headers })
+  //     .map(res => res.json());
+  // }
 
   //Adds item to user.shoppingCart 
   addToCart(user: any, itemAdded: any) {

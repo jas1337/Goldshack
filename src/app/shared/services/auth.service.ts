@@ -9,10 +9,10 @@ import { Observable } from 'rxjs/Observable';
 export class AuthService {
   authToken: any;
   user: any;
-  isDev: boolean;
+  // isDev: boolean;
 
   constructor(private http: Http) {
-    this.isDev = true; // Change to false before deployment
+    // this.isDev = true; // Change to false before deployment
   }
 
 

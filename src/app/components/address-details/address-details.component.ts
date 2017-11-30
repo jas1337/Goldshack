@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { AuthService } from '../../shared/services/auth.service';
 import { ShoppingService } from '../../shared/services/shopping.service';
+import { OrderService } from '../../shared/services/order.service';
 
 @Component({
   selector: 'app-address-details',
@@ -15,6 +16,8 @@ export class AddressDetailsComponent implements OnInit {
 
   user: any = {};
   address: String;
+  order: any = {};
+
   postalCode: String;
   city: String;
   country: String;
@@ -23,6 +26,7 @@ export class AddressDetailsComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private shoppingService: ShoppingService,
+    private orderService: OrderService,
     private router: Router
 
   ) { }
@@ -52,23 +56,26 @@ export class AddressDetailsComponent implements OnInit {
   }
 
   submitAddress() {
-
     let fullAddress = {
       address: this.address,
       postalCode: this.postalCode,
       city: this.city,
       country: this.country
     }
-    //dodac funkcje która do koszyka dodaje adress ale tylko jeden raz!
-    // moze rozbic to do innego componentu i od razu wsadzac do obiektu order??
-
     //adding addres to user.addressList
     this.shoppingService.addAddress(this.user, fullAddress)
       .subscribe(data => data);
 
-    this.shoppingService.setLastAddress(this.user, fullAddress)
-      .subscribe(data => data);
-
+    let newOrder = {
+      firstName: this.user.firstName,
+      lastName: this.user.lastName,
+      email: this.user.email,
+      date: Date.now(),
+      shoppingCart: this.user.shoppingCart,
+      totalPrice: 300,
+      fullAddress: fullAddress
+    };
+    this.orderService.addOrder(newOrder).subscribe(data => data);
   }
 
 }

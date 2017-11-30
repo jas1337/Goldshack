@@ -1,18 +1,18 @@
 <div class="row">
 
-  <div class="col-md-5">
+  <div class="col-md-4">
     <a class="navbar-brand" href="#">
       <h2>GoldShack</h2>
     </a>
   </div>
 
-  <div class="col-md-7 ">
+  <div class="col-md-8 ">
     <form class="form-inline my-2 float-right" #loginForm="ngForm" (submit)="onLoginSubmit()">
       <input class="form-control mr-sm-2" *ngIf="!authService.loggedIn()" [(ngModel)]="email" name="email" type="text" placeholder="Email"
         required>
       <input class="form-control mr-sm-2" *ngIf="!authService.loggedIn()" [(ngModel)]="password" name="password" type="password"
         placeholder="Password" required>
-      <button class="btn btn-outline-primary my-2 " *ngIf="!authService.loggedIn()" type="submit" [disabled]="loginForm.invalid">Log in</button>
+      <button class="btn btn-outline-primary my-2 " *ngIf="!authService.loggedIn()" type="submit" [disabled]="loginForm.invalid">Sign in</button>
       <a class="mx-2" href="#" *ngIf="!authService.loggedIn()" href="/registration">
         <h1>
           <i class="fa fa-user-plus" aria-hidden="true"></i>
@@ -24,7 +24,7 @@
           <i class="fa fa-shopping-cart" aria-hidden="true"></i>
         </h1>
       </a>
-      <a class="mx-2" href="#" [routerLink]="['/profile']" *ngIf="authService.loggedIn()" >
+      <a class="mx-2" href="#" [routerLink]="['/profile']" *ngIf="authService.loggedIn()">
         <h1>
           <i class="fa fa-user" aria-hidden="true"></i>
         </h1>
@@ -54,7 +54,7 @@
         <a class="nav-link" href="#" [routerLink]="['/category', 'sport']">Sport</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" href="#" [routerLink]="['/category', 'accesories']">Accessories</a>
+        <a class="nav-link" href="#" [routerLink]="['/category', 'accessories']">Accessories</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" href="#" [routerLink]="['/category', 'sale']" style="color:red">Sale!</a>

@@ -17,6 +17,7 @@ import { ValidateService } from './shared/services/validate.service';
 import { AuthService } from './shared/services/auth.service';
 import { GalleryService } from './shared/services/gallery.service';
 import { ShoppingService } from './shared/services/shopping.service';
+import { OrderService } from './shared/services/order.service';
 
 import { TruncatePipe } from './shared/pipes/truncate.pipe';
 import { CatItemComponent } from './components/category/cat-item/cat-item.component';
@@ -25,6 +26,7 @@ import { ItemOpinionsComponent } from './components/category/cat-item/item-opini
 import { ProfileComponent } from './components/profile/profile.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { AddressDetailsComponent } from './components/address-details/address-details.component';
+import { GalleryFilterPipe } from './shared/pipes/gallery-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import { AddressDetailsComponent } from './components/address-details/address-de
     ItemOpinionsComponent,
     ProfileComponent,
     ShoppingCartComponent,
-    AddressDetailsComponent
+    AddressDetailsComponent,
+    GalleryFilterPipe
   ],
   imports: [
     BrowserModule,
@@ -50,7 +53,7 @@ import { AddressDetailsComponent } from './components/address-details/address-de
     FlashMessagesModule,
     HttpModule
   ],
-  providers: [ValidateService, AuthService,GalleryService,ShoppingService],
+  providers: [ValidateService, AuthService, GalleryService, ShoppingService, OrderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
