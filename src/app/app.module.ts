@@ -26,7 +26,7 @@ import { ItemOpinionsComponent } from './components/category/cat-item/item-opini
 import { ProfileComponent } from './components/profile/profile.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { AddressDetailsComponent } from './components/address-details/address-details.component';
-import { GalleryFilterPipe } from './shared/pipes/gallery-filter.pipe';
+import { HomePageComponent } from './components/home-page/home-page.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +44,7 @@ import { GalleryFilterPipe } from './shared/pipes/gallery-filter.pipe';
     ProfileComponent,
     ShoppingCartComponent,
     AddressDetailsComponent,
-    GalleryFilterPipe
+    HomePageComponent
   ],
   imports: [
     BrowserModule,

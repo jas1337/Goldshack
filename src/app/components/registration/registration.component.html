@@ -26,8 +26,7 @@
       </div>
       <div class="form-group">
         <small class="form-text text-muted my-4">
-          <input class="" type="checkbox" style="width:20px;height:20px;" required> Click here to indicate that you have read and
-          agree to the terms presented in the Terms and Conditions agreement.
+          <input [(ngModel)]="agree" name="agree" type="checkbox" style="width:20px;height:20px;" required> Click here to indicate that you have read and agree to the terms presented in the Terms and Conditions agreement.
         </small>
         <button class="btn btn-outline-primary " style="width:100%;" type="submit" [disabled]="registerForm.invalid">Register</button>
 

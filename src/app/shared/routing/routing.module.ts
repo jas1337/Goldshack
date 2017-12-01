@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
+import { HomePageComponent } from '../../components/home-page/home-page.component';
 import { CategoryComponent } from '../../components/category/category.component';
 import { RegistrationComponent } from '../../components/registration/registration.component';
 import { CatItemComponent } from '../../components/category/cat-item/cat-item.component';
@@ -11,9 +12,9 @@ import { ShoppingCartComponent } from '../../components/shopping-cart/shopping-c
 import { AddressDetailsComponent } from '../../components/address-details/address-details.component';
 
 const routes: Routes = [
-  //     { path: '', redirectTo: 'home', pathMatch: 'full' },
-  //     { path: 'home', component: HomepageComponent },
 
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', component: HomePageComponent },
   { path: 'category/:category', component: CategoryComponent },
   { path: 'item/:_id', component: CatItemComponent },
   { path: 'registration', component: RegistrationComponent },

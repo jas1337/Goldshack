@@ -1,0 +1,25 @@
+<div class="my-5">
+  <div class="m-5  text-center">
+    <h2>LET'S START WITH THE BASICS OF BUILDING A MAN'S WARDROBE</h2>
+    <h3 class="font-italic">with GoldShack</h3>
+  </div>
+  <div class="slideshow-container">
+    <div class="" *ngFor="let image of images; let i = index">
+      <div [ngClass]="{'hiddenSlides':selectedImageIndex !== i ,'fadeIn ' : selectedImageIndex === i}">
+        <a href="#" [routerLink]="['/category', image.category]">
+          <div class="text">{{image.text}}</div>
+          <img src="{{image.url}}" style="width:100%">
+        </a>
+      </div>
+    </div>
+
+    <a class="prev" (click)="previousImage()">&#10094;</a>
+    <a class="next" (click)="nextImage()">&#10095;</a>
+  </div>
+  <div class="m-5 text-center">
+    <h2>A man's clothing not only determines whether he feels comfortable or fashionable</h2>
+    <p class="font-italic">Men's fashion gives you unlimited choices to create your image and even show some of your character, so it's so important.
+      The clothes tell the most about the man, with his help we can get the result of his choice if we can properly use the
+      knowledge of clothes and fashion.</p>
+  </div>
+</div>

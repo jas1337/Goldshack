@@ -19,6 +19,7 @@ export class RegistrationComponent implements OnInit {
   email: String;
   password: String;
   confirmPassword: String;
+  agree: Boolean;
   registerForm: NgForm;
 
   constructor(
