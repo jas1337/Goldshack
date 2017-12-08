@@ -7,6 +7,7 @@ const Order = require('../models/order');
 router.post('/addOrder', (req, res, next) => {
 
   let newOrder = new Order({
+    userId: req.body.userId,
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
@@ -32,18 +33,11 @@ router.post('/addOrder', (req, res, next) => {
 });
 
 // load  items by category
-router.get('/getOrdersByUserEmail/:email', (req, res) => {
-  Order.getOrdersByUserEmail(req.params.email, (err, orders) => {
+router.get('/getOrdersByUserId/:userId', (req, res) => {
+  Order.getOrdersByUserId(req.params.userId, (err, orders) => {
     if (err) throw err;
     res.json(orders);
   });
 });
 
-// // load single item by ID
-// router.get('/getItemById/:_id', (req, res) => {
-//   Item.getItemById(req.params._id, (err, item) => {
-//     if (err) throw err;
-//     res.json(item);
-//   })
-// });
 module.exports = router;

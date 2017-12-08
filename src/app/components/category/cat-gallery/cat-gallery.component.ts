@@ -12,8 +12,11 @@ import { GalleryService } from '../../../shared/services/gallery.service';
 })
 export class CatGalleryComponent implements OnInit {
 
+  category: any;
   items: any[];
   itemsFiltered: any[];
+  subcategories: any[];
+  selectedSubcategory = "Show all";
   brands: any[];
   selectedBrand = "Show all";
   minPrice: Number = 0;
@@ -30,17 +33,25 @@ export class CatGalleryComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.activatedRoute.params.switchMap((params: Params) => this.galleryService.getItemsByCat(params['category']))
+    this.activatedRoute.params.switchMap((params: Params) => {
+      this.category = params['category'];
+      return this.galleryService.getItemsByCat(params['category'])
+    })
       .subscribe(items => {
-        this.items = items
+
+        this.items = items;
         this.itemsFiltered = items;
 
-
+        console.log(this.category)
 
         //Clear list of brands and sizes and put them by category
-        this.sizes = []
-        this.brands = []
+        this.subcategories = [];
+        this.sizes = [];
+        this.brands = [];
         for (let item of items) {
+          if (!this.subcategories.some(x => x === item.subcategory)) {
+            this.subcategories.push(item.subcategory)
+          }
           if (!this.brands.some(x => x === item.brand)) {
             this.brands.push(item.brand)
           }
@@ -68,10 +79,10 @@ export class CatGalleryComponent implements OnInit {
     if (this.maxPrice < 0 || this.maxPrice < this.minPrice || this.maxPrice > 3000)
       this.maxPrice = 3000
 
-
     this.itemsFiltered = this.items.filter(item =>
       item.price >= this.minPrice
       && item.price <= this.maxPrice
+      && (item.subcategory == this.selectedSubcategory || this.selectedSubcategory == "Show all")
       && (item.brand == this.selectedBrand || this.selectedBrand == "Show all")
       && (item.sizes.some(x => x.size == this.selectedSize && x.available > 0) || this.selectedSize == "Show all")
     );

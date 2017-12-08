@@ -17,6 +17,19 @@ router.put('/updateOpinions/:id', function (req, res, next) {
   });
 });
 
+router.put('/updateAvailability/:id', function (req, res, next) {
+  Item.update({
+    _id: req.params.id
+  }, {
+    $set: {
+      opinions: req.body.opinions
+    }
+  }, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
+
 // // update available quantity
 // router.put('/updateAvailable/:id', function (req, res, next) {
 

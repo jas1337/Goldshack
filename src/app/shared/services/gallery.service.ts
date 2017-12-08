@@ -16,6 +16,13 @@ export class GalleryService {
       .map(res => res.json());
   }
 
+  updateAvailability(item: any) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.put('http://localhost:3000/items/updateAvailability/' + item._id, item, { headers: headers })
+      .map(res => res.json());
+  }
+
   getItemById(_id: any): Observable<any> {
     return this.http.get('http://localhost:3000/items/getItemById/' + _id)
       .map(res => res.json());

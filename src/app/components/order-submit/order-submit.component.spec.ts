@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CatListComponent } from './cat-list.component';
+import { OrderSubmitComponent } from './order-submit.component';
 
-describe('CatListComponent', () => {
-  let component: CatListComponent;
-  let fixture: ComponentFixture<CatListComponent>;
+describe('OrderSubmitComponent', () => {
+  let component: OrderSubmitComponent;
+  let fixture: ComponentFixture<OrderSubmitComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CatListComponent ]
+      declarations: [ OrderSubmitComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CatListComponent);
+    fixture = TestBed.createComponent(OrderSubmitComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

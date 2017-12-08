@@ -1,22 +1,25 @@
-<div class="row">
-  <div class="col-md-10 offset-md-1 p-4">
-    <h1 class="text-center">
-      <a [routerLink]="['/shopping-cart']">
-            <button class="btn btn-outline-primary float-left" type="submit">
-            <i class="fa fa-arrow-left" aria-hidden="true"></i> &ensp;Back 
-          </button>
-           </a> Delivery address
-      <a [routerLink]="['/address-details']">
-            <button class="btn btn-outline-primary float-right" (click)="submitAddress()" [disabled]="addressForm.invalid" type="submit">
-            Next &ensp; <i class="fa fa-arrow-right" aria-hidden="true"></i>
-          </button>
-      </a>
-    </h1>
+<div class="my-3">
+
+  <h2 class="text-center "> Delivery address </h2>
+  <div class=" mb-5">
+
+    <a [routerLink]="['/shopping-cart']">
+      <button class="btn btn-outline-primary float-left" type="submit">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> &ensp;Back
+      </button>
+    </a>
+    <a [routerLink]="['/order-submit']">
+      <button class="btn btn-outline-primary float-right" (click)="submitAddress()" [disabled]="addressForm.invalid" type="submit">
+        Next &ensp;
+        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+      </button>
+    </a>
   </div>
 </div>
 
-<div class="row">
-  <div class="col-md-5 offset-md-1">
+<div class="row my-5">
+  <div class="col-md-6">
+    <hr>
     <h3>Enter address</h3>
     <form #addressForm="ngForm">
       <div class="form-group">
@@ -37,19 +40,20 @@
       </div>
     </form>
   </div>
-  <div class="col-md-5">
+  <div class="col-md-6">
+    <hr>
     <h3>Previously used addresses</h3>
     <table class="table table-hover ">
       <tbody>
-         <tr *ngFor="let fullAddress of user.addressList;let i = index" >
+        <tr *ngFor="let fullAddress of user.addressList;let i = index">
           <td (click)="setAddress(i)">
-            <h5><strong>{{fullAddress.postalCode}}, {{fullAddress.city}}</strong> </h5>
+            <h5>
+              <strong>{{fullAddress.postalCode}}, {{fullAddress.city}}</strong>
+            </h5>
             <h5>{{fullAddress.address}}</h5>
           </td>
-        </tr> 
+        </tr>
       </tbody>
     </table>
-  </div>
-  <div class="offset-md-1">
   </div>
 </div>

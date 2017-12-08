@@ -15,6 +15,7 @@ export class ShoppingCartComponent implements OnInit {
 
   user: Object;
   shoppingCart: any;
+  totalPrice: Number = 0;
 
   constructor(
     private authService: AuthService,
@@ -28,6 +29,13 @@ export class ShoppingCartComponent implements OnInit {
       this.authService.getProfile().subscribe(profile => {
         this.user = profile.user;
         this.shoppingCart = profile.user.shoppingCart;
+
+        for (let item of this.shoppingCart)
+          this.totalPrice += item.price;
+
+        if (!this.authService.loggedIn()) {
+          this.router.navigate(['/']);
+        }
       },
         err => {
           console.log(err);
@@ -37,20 +45,6 @@ export class ShoppingCartComponent implements OnInit {
       this.router.navigate(['/']);
     }
   }
-
-  //shoppingCart becomes object in orderHistory array
-  // submitOrder() {
-
-  //   if (this.shoppingCart.length > 0 && this.shoppingCart != 'foobar') {
-
-  //     // console.log(this.user);
-  //     console.log(this.shoppingCart);
-  //     this.shoppingService.submitOrder(this.user, this.shoppingCart)
-  //       .subscribe(data => data)
-  //     this.flashMessagesService.show('Order has been submitted', { cssClass: 'alert-success', timeout: 1500 });
-  //     console.log(this.user);
-  //   }
-  // }
 
   removeFromCart(itemRemoved) {
     this.shoppingService.removeFromCart(this.user, itemRemoved)

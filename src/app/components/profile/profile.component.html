@@ -1,3 +1,72 @@
-<p>
-  profile works!
-</p>
+<div class="row my-3">
+  <div class="col-md-9">
+    <h3>Order history</h3>
+
+    <div *ngIf="orders?.length === 0">
+      <hr>
+      <h5>No orders in history</h5>
+    </div>
+
+    <div *ngFor="let order of orders">
+      <hr>
+      <div class="row">
+
+        <div class="col-4">
+          <h6 class="red"> {{order._id }} </h6>
+          <h6> {{order.date | date: 'MMM d, y, hh:mm a'}} </h6>
+
+        </div>
+
+        <div class="col-6">
+
+          <span *ngFor="let item of order.shoppingCart;let i = index">
+            <a [routerLink]="['/item', item._id]">
+              <h6>{{i+1}}.
+                <strong>{{item.brand}}</strong> {{item.name}},
+                <strong>size : {{item.sizeSelected}}</strong> ,
+                <strong> {{item.price| currency:'PLN '}}</strong>
+              </h6>
+            </a>
+          </span>
+
+        </div>
+        <div class="col-2">
+
+          <h6>
+            realization
+          </h6>
+          <h6>
+            <strong>Cancel </strong>
+          </h6>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-md-3">
+
+    <h3>User info</h3>
+    <hr>
+    <h6>
+      <strong> Frist name : </strong>{{user.firstName}}
+    </h6>
+    <h6>
+      <strong>Last name : </strong>{{user.lastName}}
+    </h6>
+    <h6>
+      <strong>Email : </strong>{{user.email}}
+    </h6>
+    <h6>
+      <strong>Adress list :</strong>
+    </h6>
+    <div *ngFor="let fullAddress of user.addressList;let i = index">
+      <hr>
+      <h6>
+        <strong>{{fullAddress.postalCode}}, {{fullAddress.city}}</strong>
+      </h6>
+      <h6>{{fullAddress.address}}</h6>
+    </div>
+  </div>
+</div>

@@ -7,8 +7,8 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { CategoryComponent } from './components/category/category.component';
-import { CatListComponent } from './components/category/cat-list/cat-list.component';
+
+
 import { CatGalleryComponent } from './components/category/cat-gallery/cat-gallery.component';
 import { RegistrationComponent } from './components/registration/registration.component'
 
@@ -27,14 +27,13 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { AddressDetailsComponent } from './components/address-details/address-details.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
+import { OrderSubmitComponent } from './components/order-submit/order-submit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
     FooterComponent,
-    CategoryComponent,
-    CatListComponent,
     CatGalleryComponent,
     RegistrationComponent,
     TruncatePipe,
@@ -44,7 +43,8 @@ import { HomePageComponent } from './components/home-page/home-page.component';
     ProfileComponent,
     ShoppingCartComponent,
     AddressDetailsComponent,
-    HomePageComponent
+    HomePageComponent,
+    OrderSubmitComponent
   ],
   imports: [
     BrowserModule,

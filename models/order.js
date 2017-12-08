@@ -4,6 +4,10 @@ const mongoose = require('mongoose');
 // Item Schema
 const OrderSchema = mongoose.Schema({
 
+
+  userId: {
+    type: String
+  },
   firstName: {
     type: String
   },
@@ -23,7 +27,11 @@ const OrderSchema = mongoose.Schema({
   totalPrice: {
     type: Number
   },
-  fullAddress: {}
+  fullAddress: {},
+  status: {
+    type: String,
+    default: "realization"
+  }
 });
 
 
@@ -33,9 +41,9 @@ module.exports.addOrder = (order, callback) => {
   Order.create(order, callback);
 }
 
-module.exports.getOrdersByUserEmail = function (email, callback) {
+module.exports.getOrdersByUserId = function (userId, callback) {
   Order.find({
-    'email': email
+    'userId': userId
   }, callback);
 }
 

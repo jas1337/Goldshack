@@ -30,7 +30,7 @@ router.post('/register', (req, res, next) => {
           email: req.body.email,
           password: req.body.password,
           shoppingCart: [],
-          orderHistory: [],
+          // orderHistory: [],
           addressList: [],
         });
 
@@ -89,8 +89,9 @@ router.post('/authenticate', (req, res, next) => {
             lastName: user.lastName,
             email: user.email,
             shoppingCart: user.shoppingCart,
-            orderHistory: user.orderHistory,
-            addressList: user.addressList
+            // orderHistory: user.orderHistory,
+            addressList: user.addressList,
+            lastAddress: user.lastAddress
           }
         });
       } else {
@@ -132,6 +133,33 @@ router.put('/updateAddressList/:id', function (req, res, next) {
   });
 });
 
+//updates user.addressList
+router.put('/setLastAddress/:id', function (req, res, next) {
+  User.update({
+    _id: req.params.id
+  }, {
+    $set: {
+      lastAddress: req.body.lastAddress
+    }
+  }, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
+
+router.put('/addOrderToHistory/:id', function (req, res, next) {
+  User.update({
+    _id: req.params.id
+  }, {
+    $set: {
+      orderHistory: req.body.orderHistory
+    }
+  }, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
+
 router.get('/profile', passport.authenticate('jwt', {
   session: false
 }), (req, res, next) => {
@@ -142,8 +170,9 @@ router.get('/profile', passport.authenticate('jwt', {
       lastName: req.user.lastName,
       email: req.user.email,
       shoppingCart: req.user.shoppingCart,
-      orderHistory: req.user.orderHistory,
-      addressList: req.user.addressList
+      // orderHistory: req.user.orderHistory,
+      addressList: req.user.addressList,
+      lastAddress: req.user.lastAddress
     }
   });
 });

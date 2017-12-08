@@ -20,7 +20,8 @@ const ItemSchema = mongoose.Schema({
     type: [String]
   },
   category: {
-    type: String,
+    type: Array,
+    default: [],
     lowercase: true
   },
   subcategory: {

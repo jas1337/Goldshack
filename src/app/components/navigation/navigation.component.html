@@ -1,7 +1,7 @@
 <div class="row">
 
   <div class="col-md-4">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand">
       <h2>GoldShack</h2>
     </a>
   </div>
@@ -13,18 +13,18 @@
       <input class="form-control mr-sm-2" *ngIf="!authService.loggedIn()" [(ngModel)]="password" name="password" type="password"
         placeholder="Password" required>
       <button class="btn btn-outline-primary my-2 " *ngIf="!authService.loggedIn()" type="submit" [disabled]="loginForm.invalid">Log in</button>
-      <a class="mx-2" href="#" *ngIf="!authService.loggedIn()" href="/registration">
+      <a class="mx-2" *ngIf="!authService.loggedIn()" [routerLink]="['/registration']">
         <h1>
           <i class="fa fa-user-plus" aria-hidden="true"></i>
         </h1>
       </a>
 
-      <a href="#" [routerLink]="['/shopping-cart']" *ngIf="authService.loggedIn()" routerLink='/'>
+      <a [routerLink]="['/shopping-cart']" *ngIf="authService.loggedIn()" routerLink='/'>
         <h1>
           <i class="fa fa-shopping-cart" aria-hidden="true"></i>
         </h1>
       </a>
-      <a class="mx-2" href="#" [routerLink]="['/profile']" *ngIf="authService.loggedIn()">
+      <a class="mx-2" [routerLink]="['/profile']" *ngIf="authService.loggedIn()">
         <h1>
           <i class="fa fa-user" aria-hidden="true"></i>
         </h1>
@@ -36,7 +36,7 @@
   </div>
 </div>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-md navbar-light bg-light">
 
   <button [ngClass]="{'collapsed':isCollapsed == true}" class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed">
     <span class="navbar-toggler-icon"></span>
@@ -45,24 +45,24 @@
   <div [ngClass]="{'show': isCollapsed == false}" class="collapse navbar-collapse" id="navbarColor02">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" href="#" [routerLink]="['/category', 'clothing']">Clothing</a>
+        <a class="nav-link" [routerLink]="['/category', 'clothing']">Clothing</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" href="#" [routerLink]="['/category', 'footwear']">Footwear</a>
+        <a class="nav-link" [routerLink]="['/category', 'footwear']">Footwear</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" href="#" [routerLink]="['/category', 'sport']">Sport</a>
+        <a class="nav-link" [routerLink]="['/category', 'sport']">Sport</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" href="#" [routerLink]="['/category', 'accessories']">Accessories</a>
+        <a class="nav-link" [routerLink]="['/category', 'accessories']">Accessories</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" href="#" [routerLink]="['/category', 'sale']" style="color:red">Sale!</a>
+        <a class="nav-link" [routerLink]="['/category', 'sale']" style="color:red">Sale!</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search">
-      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+    <form class="form-inline my-2 ">
+      <input class="form-control mr-sm-2" style="max-width:150px;" type="text" placeholder="Search">
+      <button class="btn btn-secondary my-2 " type="submit">Search</button>
     </form>
   </div>
 </nav>

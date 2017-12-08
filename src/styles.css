@@ -2,6 +2,19 @@
   box-sizing: border-box
 }
 
+.red {
+  color: red;
+}
+
+hr {
+  margin-top: 5px!important;
+  margin-bottom: 5px!important;
+}
+
+.sale {
+  text-decoration: line-through;
+}
+
 .slideshow-container {
   max-width: 1000px;
   position: relative;
@@ -123,6 +136,11 @@ i:hover {
 
 .item-img {
   width: 100%;
+}
+
+.item-img-small {
+  width: 100%;
+  max-width: 120px;
 }
 
 
@@ -2081,7 +2099,6 @@ pre code {
 .table td {
   padding: 0.75rem;
   vertical-align: top;
-  border-top: 1px solid #ddd;
 }
 
 .table thead th {

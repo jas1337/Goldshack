@@ -9,13 +9,7 @@ export class ShoppingService {
 
   constructor(private http: Http) { }
 
-  // submitOrder(user: any, order: any) {
-  //   let headers = new Headers();
-  //   headers.append('Content-Type', 'application/json');
-  //   user.orderHistory.push(order);
-  //   return this.http.put('http://localhost:3000/users/' + user.id, user, { headers: headers })
-  //     .map(res => res.json());
-  // }
+
 
   //updates user.addressList - data from form in address-details
   addAddress(user: any, fullAddress: any) {
@@ -36,17 +30,16 @@ export class ShoppingService {
       .map(res => res.json());
   }
 
-  // //updates user.addressList - data from form in address-details
-  // setLastAddress(user: any, lastAddress: any) {
-  //   let headers = new Headers();
-  //   headers.append('Content-Type', 'application/json');
+  setLastAddress(user: any, lastAddress: any) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
 
-  //   // user.lastAddress.push(lastAddress.address) ;
-  //   user.lastAddress[0] = lastAddress;
-  //   console.log(user)
-  //   return this.http.put('http://localhost:3000/users/setLastAddress/' + user.id, user, { headers: headers })
-  //     .map(res => res.json());
-  // }
+    // user.lastAddress.push(lastAddress.address) ;
+    user.lastAddress = lastAddress;
+    // console.log(user)
+    return this.http.put('http://localhost:3000/users/setLastAddress/' + user.id, user, { headers: headers })
+      .map(res => res.json());
+  }
 
   //Adds item to user.shoppingCart 
   addToCart(user: any, itemAdded: any) {
@@ -64,6 +57,12 @@ export class ShoppingService {
     return this.http.put('http://localhost:3000/users/updateCart/' + user.id, user, { headers: headers })
       .map(res => res.json());
   }
-
+  clearCart(user: any) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    user.shoppingCart = [];
+    return this.http.put('http://localhost:3000/users/updateCart/' + user.id, user, { headers: headers })
+      .map(res => res.json());
+  }
 
 }

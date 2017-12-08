@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 
 import { AuthService } from '../../shared/services/auth.service';
 import { ShoppingService } from '../../shared/services/shopping.service';
-import { OrderService } from '../../shared/services/order.service';
 
 @Component({
   selector: 'app-address-details',
@@ -16,8 +15,6 @@ export class AddressDetailsComponent implements OnInit {
 
   user: any = {};
   address: String;
-  order: any = {};
-
   postalCode: String;
   city: String;
   country: String;
@@ -26,7 +23,6 @@ export class AddressDetailsComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private shoppingService: ShoppingService,
-    private orderService: OrderService,
     private router: Router
 
   ) { }
@@ -35,9 +31,13 @@ export class AddressDetailsComponent implements OnInit {
     if (this.authService.loggedIn()) {
       this.authService.getProfile().subscribe(profile => {
         this.user = profile.user;
-        console.log(this.user)
+        this.address = profile.user.lastAddress.address;
+        this.postalCode = profile.user.lastAddress.postalCode;
+        this.city = profile.user.lastAddress.city;
+        this.country = profile.user.lastAddress.country;
+
         if (profile.user.shoppingCart.length == 0)
-          this.router.navigate(['/']);
+          this.router.navigate(['/shopping-cart']);
       },
         err => {
           console.log(err);
@@ -63,19 +63,10 @@ export class AddressDetailsComponent implements OnInit {
       country: this.country
     }
     //adding addres to user.addressList
-    this.shoppingService.addAddress(this.user, fullAddress)
+
+    this.shoppingService.setLastAddress(this.user, fullAddress)
       .subscribe(data => data);
 
-    let newOrder = {
-      firstName: this.user.firstName,
-      lastName: this.user.lastName,
-      email: this.user.email,
-      date: Date.now(),
-      shoppingCart: this.user.shoppingCart,
-      totalPrice: 300,
-      fullAddress: fullAddress
-    };
-    this.orderService.addOrder(newOrder).subscribe(data => data);
   }
 
 }
