@@ -9,8 +9,6 @@ export class ShoppingService {
 
   constructor(private http: Http) { }
 
-
-
   //updates user.addressList - data from form in address-details
   addAddress(user: any, fullAddress: any) {
     let headers = new Headers();
@@ -26,18 +24,15 @@ export class ShoppingService {
     if (!addressExist) {
       user.addressList.push(fullAddress);
     }
-    return this.http.put('http://localhost:3000/users/updateAddressList/' + user.id, user, { headers: headers })
+    return this.http.put('users/updateAddressList/' + user.id, user, { headers: headers })
       .map(res => res.json());
   }
 
   setLastAddress(user: any, lastAddress: any) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-
-    // user.lastAddress.push(lastAddress.address) ;
     user.lastAddress = lastAddress;
-    // console.log(user)
-    return this.http.put('http://localhost:3000/users/setLastAddress/' + user.id, user, { headers: headers })
+    return this.http.put('users/setLastAddress/' + user.id, user, { headers: headers })
       .map(res => res.json());
   }
 
@@ -46,7 +41,7 @@ export class ShoppingService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     user.shoppingCart.push(itemAdded);
-    return this.http.put('http://localhost:3000/users/updateCart/' + user.id, user, { headers: headers })
+    return this.http.put('users/updateCart/' + user.id, user, { headers: headers })
       .map(res => res.json());
   }
 
@@ -54,14 +49,15 @@ export class ShoppingService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     user.shoppingCart.splice(itemRemoved, 1);
-    return this.http.put('http://localhost:3000/users/updateCart/' + user.id, user, { headers: headers })
+    return this.http.put('users/updateCart/' + user.id, user, { headers: headers })
       .map(res => res.json());
   }
+
   clearCart(user: any) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     user.shoppingCart = [];
-    return this.http.put('http://localhost:3000/users/updateCart/' + user.id, user, { headers: headers })
+    return this.http.put('users/updateCart/' + user.id, user, { headers: headers })
       .map(res => res.json());
   }
 

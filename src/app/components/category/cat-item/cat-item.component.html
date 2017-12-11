@@ -1,11 +1,11 @@
 <div *ngIf="item">
   <div class="row">
     <div class="col-md-1 my-3  hidden-md">
-      <img *ngFor="let img of item.imgs" class="item-img  my-2" src="{{img}}">
+      <img (click)="selectImage(i)" *ngFor="let img of item.imgs; let i= index" class="item-img  my-2" src="{{img}}">
     </div>
 
     <div class="col-md-5 my-3">
-      <img class="item-img my-2" src="{{item.imgs[0]}}">
+      <img class="item-img my-2" src="{{item.imgs[imageSelected]}}">
     </div>
 
     <div class="col-md-5 offset-md-1 my-5">

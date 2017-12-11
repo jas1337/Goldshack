@@ -31,11 +31,12 @@ export class AddressDetailsComponent implements OnInit {
     if (this.authService.loggedIn()) {
       this.authService.getProfile().subscribe(profile => {
         this.user = profile.user;
-        this.address = profile.user.lastAddress.address;
-        this.postalCode = profile.user.lastAddress.postalCode;
-        this.city = profile.user.lastAddress.city;
-        this.country = profile.user.lastAddress.country;
-
+        if (this.user.lastAddress) {
+          this.address = profile.user.lastAddress.address;
+          this.postalCode = profile.user.lastAddress.postalCode;
+          this.city = profile.user.lastAddress.city;
+          this.country = profile.user.lastAddress.country;
+        }
         if (profile.user.shoppingCart.length == 0)
           this.router.navigate(['/shopping-cart']);
       },

@@ -1,7 +1,7 @@
 <div class="row">
 
   <div class="col-md-4">
-    <a class="navbar-brand">
+    <a class="navbar-brand" [routerLink]="['/']">
       <h2>GoldShack</h2>
     </a>
   </div>
@@ -19,7 +19,7 @@
         </h1>
       </a>
 
-      <a [routerLink]="['/shopping-cart']" *ngIf="authService.loggedIn()" routerLink='/'>
+      <a [routerLink]="['/shopping-cart']" *ngIf="authService.loggedIn()">
         <h1>
           <i class="fa fa-shopping-cart" aria-hidden="true"></i>
         </h1>
@@ -45,24 +45,20 @@
   <div [ngClass]="{'show': isCollapsed == false}" class="collapse navbar-collapse" id="navbarColor02">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/category', 'clothing']">Clothing</a>
+        <a class="nav-link" [routerLink]="['/category/clothing']">Clothing</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/category', 'footwear']">Footwear</a>
+        <a class="nav-link" [routerLink]="['/category/footwear']">Footwear</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/category', 'sport']">Sport</a>
+        <a class="nav-link" [routerLink]="['/category/sport']">Sport</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/category', 'accessories']">Accessories</a>
+        <a class="nav-link" [routerLink]="['/category/accessories']">Accessories</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/category', 'sale']" style="color:red">Sale!</a>
+        <a class="nav-link red" [routerLink]="['/category/sale']">Sale!</a>
       </li>
     </ul>
-    <form class="form-inline my-2 ">
-      <input class="form-control mr-sm-2" style="max-width:150px;" type="text" placeholder="Search">
-      <button class="btn btn-secondary my-2 " type="submit">Search</button>
-    </form>
   </div>
 </nav>

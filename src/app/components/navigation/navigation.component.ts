@@ -53,7 +53,6 @@ export class NavigationComponent implements OnInit {
           cssClass: 'alert-danger',
           timeout: 1500
         });
-
       }
     });
   }

@@ -15,7 +15,7 @@ export class ShoppingCartComponent implements OnInit {
 
   user: Object;
   shoppingCart: any;
-  totalPrice: Number = 0;
+  totalPrice: any = 0;
 
   constructor(
     private authService: AuthService,
@@ -31,7 +31,7 @@ export class ShoppingCartComponent implements OnInit {
         this.shoppingCart = profile.user.shoppingCart;
 
         for (let item of this.shoppingCart)
-          this.totalPrice += item.price;
+          this.totalPrice += (item.quantity * item.price);
 
         if (!this.authService.loggedIn()) {
           this.router.navigate(['/']);
@@ -47,9 +47,14 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   removeFromCart(itemRemoved) {
+
+    this.totalPrice -= (this.shoppingCart[itemRemoved].quantity * this.shoppingCart[itemRemoved].price);
+
     this.shoppingService.removeFromCart(this.user, itemRemoved)
       .subscribe(data => data)
-    this.flashMessagesService.show('Item removed from cart', { cssClass: 'alert-success', timeout: 1500 });
+
+
+
   }
 
 }

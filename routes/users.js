@@ -30,7 +30,6 @@ router.post('/register', (req, res, next) => {
           email: req.body.email,
           password: req.body.password,
           shoppingCart: [],
-          // orderHistory: [],
           addressList: [],
         });
 
@@ -78,7 +77,7 @@ router.post('/authenticate', (req, res, next) => {
       if (err) throw err;
       if (isMatch) {
         const token = jwt.sign(user.toJSON(), config.secret, {
-          expiresIn: 604800
+          expiresIn: 60 * 60 * 6
         });
         res.json({
           success: true,
@@ -89,7 +88,6 @@ router.post('/authenticate', (req, res, next) => {
             lastName: user.lastName,
             email: user.email,
             shoppingCart: user.shoppingCart,
-            // orderHistory: user.orderHistory,
             addressList: user.addressList,
             lastAddress: user.lastAddress
           }
@@ -170,7 +168,6 @@ router.get('/profile', passport.authenticate('jwt', {
       lastName: req.user.lastName,
       email: req.user.email,
       shoppingCart: req.user.shoppingCart,
-      // orderHistory: req.user.orderHistory,
       addressList: req.user.addressList,
       lastAddress: req.user.lastAddress
     }

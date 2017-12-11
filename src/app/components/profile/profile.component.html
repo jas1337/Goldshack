@@ -7,31 +7,32 @@
       <h5>No orders in history</h5>
     </div>
 
-    <div *ngFor="let order of orders">
+    <div *ngFor="let order of orders; let i = index">
       <hr>
       <div class="row">
 
         <div class="col-4">
+          <h5 *ngIf="i === 0">Order number</h5>
           <h6 class="red"> {{order._id }} </h6>
           <h6> {{order.date | date: 'MMM d, y, hh:mm a'}} </h6>
 
         </div>
 
         <div class="col-6">
-
+          <h5 *ngIf="i === 0">Items</h5>
           <span *ngFor="let item of order.shoppingCart;let i = index">
             <a [routerLink]="['/item', item._id]">
               <h6>{{i+1}}.
                 <strong>{{item.brand}}</strong> {{item.name}},
-                <strong>size : {{item.sizeSelected}}</strong> ,
-                <strong> {{item.price| currency:'PLN '}}</strong>
+                <strong>size: {{item.sizeSelected}}</strong>
+                <label *ngIf="item.quantity > 1">, quantity: x{{item.quantity}}</label>
               </h6>
             </a>
           </span>
 
         </div>
         <div class="col-2">
-
+          <h5 *ngIf="i === 0">Status</h5>
           <h6>
             realization
           </h6>

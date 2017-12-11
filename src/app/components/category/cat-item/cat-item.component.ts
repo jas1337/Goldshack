@@ -20,14 +20,10 @@ export class CatItemComponent implements OnInit {
   user_id: any;
   item: any;
   sizeSelected: any;
+  shoppingCart: any = [];
   available: any;
   buyForm: NgForm;
-
-  onSizeSelect() {
-    if (this.item) {
-      this.available = this.item.sizes[this.sizeSelected].available;
-    }
-  }
+  imageSelected: any = 0;
 
   constructor(
     private galleryService: GalleryService,
@@ -43,8 +39,12 @@ export class CatItemComponent implements OnInit {
       .subscribe(item => {
         if (item.notFound)
           this.router.navigate(['/404']);
-        else
+        else {
           this.item = item;
+
+        }
+
+
       },
       err => {
         console.log(err);
@@ -54,13 +54,14 @@ export class CatItemComponent implements OnInit {
       this.authService.getProfile().subscribe(profile => {
         this.user = profile.user;
         this.user_id = profile.user.id
+        this.shoppingCart = profile.user.shoppingCart;
+        console.log(this.shoppingCart)
       },
         err => {
           console.log(err);
           return false;
         });
     }
-
   }
   addToCart(sizeSelected) {
 
@@ -73,14 +74,32 @@ export class CatItemComponent implements OnInit {
             brand: this.item.brand,
             name: this.item.name,
             price: this.item.price,
+            sizes: this.item.sizes,
             img: this.item.imgs[0],
+            // details: this.item.details,
+            // category: this.item.category,
+            // subcategory: this.item.subcategory,
             sizeSelected: this.item.sizes[sizeSelected].size,
-            category: this.item.category,
-            subcategory: this.item.subcategory,
+            quantity: 1
           }
+
+          let itemFromCart = (this.shoppingCart.find(x => x._id === this.item._id
+            && x.sizeSelected === this.item.sizes[sizeSelected].size))
+
+          for (let item of this.shoppingCart) {
+            if (item === itemFromCart) {
+              itemAdded.quantity = itemFromCart.quantity + 1;
+
+              this.shoppingService.removeFromCart(this.user, this.shoppingCart.indexOf(itemFromCart))
+                .subscribe(data => data)
+            }
+          }
+
+
           this.shoppingService.addToCart(this.user, itemAdded)
             .subscribe(data => data)
           this.flashMessagesService.show('Item added to cart', { cssClass: 'alert-success', timeout: 1500 });
+          console.log(this.shoppingCart)
         } else {
           this.flashMessagesService.show('Sorry, the product has run out', { cssClass: 'alert-danger', timeout: 1500 });
         }
@@ -88,6 +107,17 @@ export class CatItemComponent implements OnInit {
 
   }
 
+  onSizeSelect() {
+    if (this.item) {
+      this.available = this.item.sizes[this.sizeSelected].available;
+
+      let itemFromCart = (this.shoppingCart.find(x => x._id === this.item._id
+        && x.sizeSelected === this.item.sizes[this.sizeSelected].size
+      ))
+      if (itemFromCart)
+        this.available -= itemFromCart.quantity;
+    }
+  }
   onOpinionAdded(opinion: { name: string; opinionText: string; }) {
     this.item.opinions.push(opinion);
     this.galleryService.updateOpinions(this.item)
@@ -98,6 +128,10 @@ export class CatItemComponent implements OnInit {
     this.item.opinions.splice(index, 1);
     this.galleryService.updateOpinions(this.item)
       .subscribe(data => data)
+  }
+
+  selectImage(i) {
+    this.imageSelected = i;
   }
 }
 

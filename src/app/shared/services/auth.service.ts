@@ -15,31 +15,17 @@ export class AuthService {
     // this.isDev = true; // Change to false before deployment
   }
 
-
-  // updateUser(user: any, order: any) {
-
-  //   let headers = new Headers();
-  //   headers.append('Content-Type', 'application/json');
-
-  //   user.orderHistory.push(order);
-  //   // console.log(user);
-  //   return this.http.put('http://localhost:3000/users/' + user._id, user, { headers: headers })
-  //     .map(res => res.json());
-  //   // .map(res => res.text()).subscribe(data => console.log(data));
-  //   // .map(res => res.json()).subscribe(data => console.log(data));
-  // }
-
   registerUser(user: any) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/users/register', user, { headers: headers })
+    return this.http.post('users/register', user, { headers: headers })
       .map(res => res.json());
   }
 
   authenticateUser(user: any) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/users/authenticate', user, { headers: headers })
+    return this.http.post('users/authenticate', user, { headers: headers })
       .map(res => res.json());
 
   }
@@ -49,7 +35,7 @@ export class AuthService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.get('http://localhost:3000/users/profile', { headers: headers })
+    return this.http.get('users/profile', { headers: headers })
       .map(res => res.json());
   }
 

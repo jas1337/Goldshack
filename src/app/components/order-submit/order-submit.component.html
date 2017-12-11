@@ -27,7 +27,8 @@
             </h5>
             <h5>{{item.name | truncate}}
             </h5>
-            <h5>Size {{item.sizeSelected}}</h5>
+            <h5>Size: {{item.sizeSelected}}</h5>
+            <h5>Quantity: x{{item.quantity}}</h5>
             <h4>{{item.price | currency:'PLN '}}</h4>
           </td>
         </tr>
@@ -36,7 +37,8 @@
   </div>
   <div class="col-md-5">
     <hr>
-    <h3>Delivery address</h3>
+    <h3>Delivery info</h3>
+    <h5> {{user.firstName}} {{user.lastName}}</h5>
     <h5> {{lastAddress?.address}}</h5>
     <h5> {{lastAddress?.postalCode}} , {{lastAddress?.city}} </h5>
     <h5>

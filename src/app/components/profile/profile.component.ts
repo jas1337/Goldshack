@@ -28,10 +28,9 @@ export class ProfileComponent implements OnInit {
         }
         this.user = profile.user;
 
-
         this.orderService.getOrdersByUserId(this.user.id).subscribe(orders => {
           this.orders = orders
-          console.log(this.orders)
+
         });
       },
         err => {
@@ -41,11 +40,5 @@ export class ProfileComponent implements OnInit {
     } else {
       this.router.navigate(['/']);
     }
-
-
-
-
-
   }
-
 }

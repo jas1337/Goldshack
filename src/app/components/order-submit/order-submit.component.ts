@@ -16,7 +16,7 @@ export class OrderSubmitComponent implements OnInit {
 
   user: any = {};
   order: any = {};
-  totalPrice: Number = 0;
+  totalPrice: any = 0;
   lastAddress: any;
 
 
@@ -40,7 +40,7 @@ export class OrderSubmitComponent implements OnInit {
         this.lastAddress = profile.user.lastAddress;
 
         for (let item of profile.user.shoppingCart)
-          this.totalPrice += item.price;
+          this.totalPrice += (item.price * item.quantity);
       },
         err => {
           console.log(err);
@@ -54,7 +54,6 @@ export class OrderSubmitComponent implements OnInit {
 
   submitOrder() {
 
-
     let newOrder = {
       userId: this.user.id,
       firstName: this.user.firstName,
@@ -66,20 +65,14 @@ export class OrderSubmitComponent implements OnInit {
       fullAddress: this.user.lastAddress
     };
 
-    let iterator = 0;
-
     for (let itemFromCart of newOrder.shoppingCart) {
-      console.log(itemFromCart)
 
-      this.galleryService.getItemById(itemFromCart._id)
-        .subscribe(item => {
-          // if () {
-          //   x.available
-          //   iterator++;
-          console.log(item.sizes.find(x => x.size === itemFromCart.sizeSelected).available);
+      let size = itemFromCart.sizes.find(x => x.size === itemFromCart.sizeSelected)
+      let index = itemFromCart.sizes.indexOf(size);
+      itemFromCart.sizes[index].available -= itemFromCart.quantity;
 
-          // }
-        },
+      this.galleryService.updateAvailability(itemFromCart)
+        .subscribe(item => item,
         err => {
           console.log(err);
           return false;
@@ -87,13 +80,12 @@ export class OrderSubmitComponent implements OnInit {
 
     }
 
-    // this.orderService.addOrder(newOrder).subscribe(data => data);
-    // // this.orderService.addOrderToHistory(this.user, newOrder).subscribe(data => data);
-    // this.shoppingService.clearCart(this.user).subscribe(data => data);
-    // this.shoppingService.addAddress(this.user, this.user.lastAddress)
-    //   .subscribe(data => data);
-    // this.flashMessagesService.show('Your order has been submitted', { cssClass: 'alert-success', timeout: 2000 });
-    // this.router.navigate(['/profile'])
+    this.orderService.addOrder(newOrder).subscribe(data => data);
+    this.shoppingService.clearCart(this.user).subscribe(data => data);
+    this.shoppingService.addAddress(this.user, this.user.lastAddress)
+      .subscribe(data => data);
+    this.flashMessagesService.show('Your order has been submitted', { cssClass: 'alert-success', timeout: 2000 });
+    this.router.navigate(['/profile'])
 
   }
 

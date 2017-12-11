@@ -25,10 +25,6 @@ const UserSchema = mongoose.Schema({
     type: Array,
     default: []
   },
-  // orderHistory: {
-  //   type: Array,
-  //   default: []
-  // },
   addressList: {
     type: Array,
     default: []

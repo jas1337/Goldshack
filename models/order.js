@@ -34,7 +34,6 @@ const OrderSchema = mongoose.Schema({
   }
 });
 
-
 const Order = module.exports = mongoose.model('Order', OrderSchema);
 
 module.exports.addOrder = (order, callback) => {
@@ -46,16 +45,3 @@ module.exports.getOrdersByUserId = function (userId, callback) {
     'userId': userId
   }, callback);
 }
-
-// module.exports.getItemByUser = function (_id, callback) {
-
-//   if (mongoose.Types.ObjectId.isValid(_id)) {
-//     Item.findById(_id, callback);
-//   } else {
-//     console.log("Item not found");
-//   }
-// }
-
-// module.exports.getItems = function (callback) {
-//   Item.find(callback);
-// }

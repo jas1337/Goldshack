@@ -22,22 +22,13 @@ router.put('/updateAvailability/:id', function (req, res, next) {
     _id: req.params.id
   }, {
     $set: {
-      opinions: req.body.opinions
+      sizes: req.body.sizes
     }
   }, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
 });
-
-// // update available quantity
-// router.put('/updateAvailable/:id', function (req, res, next) {
-
-//     Item.update({ _id: req.params.id }, { $set: { opinions: req.body.opinions } }, function (err, post) {
-//         if (err) return next(err);
-//         res.json(post);
-//     });
-// });
 
 // Add item to gallery
 router.post('/addItem', (req, res, next) => {
@@ -66,6 +57,19 @@ router.post('/addItem', (req, res, next) => {
         msg: 'Item added'
       });
     }
+  });
+});
+
+router.put('/updateAvailability/:id', function (req, res, next) {
+  Item.update({
+    _id: req.params.id
+  }, {
+    $set: {
+      sizes: req.body.sizes
+    }
+  }, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
   });
 });
 

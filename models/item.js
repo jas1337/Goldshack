@@ -45,11 +45,6 @@ module.exports.getItemByCat = function (category, callback) {
     'category': category
   }, callback);
 }
-// module.exports.getItemBySubcat = function (subcategory, callback) {
-//   Item.find({
-//     'subcategory': subcategory
-//   }, callback);
-// }
 
 module.exports.getItemById = function (_id, callback) {
   Item.findById(_id, (callback));

@@ -13,16 +13,17 @@ import { GalleryService } from '../../../shared/services/gallery.service';
 export class CatGalleryComponent implements OnInit {
 
   category: any;
-  items: any[];
-  itemsFiltered: any[];
+  items: any[] = [];
+  itemsFiltered: any[] = [];
   subcategories: any[];
   selectedSubcategory = "Show all";
   brands: any[];
   selectedBrand = "Show all";
-  minPrice: Number = 0;
-  maxPrice: Number = 3000
+  minPrice: Number;
+  maxPrice: Number;
   sizes: any[];
   selectedSize = "Show all";
+  searchPhase: String = ""
 
   constructor(
     private galleryService: GalleryService,
@@ -42,12 +43,12 @@ export class CatGalleryComponent implements OnInit {
         this.items = items;
         this.itemsFiltered = items;
 
-        console.log(this.category)
-
         //Clear list of brands and sizes and put them by category
         this.subcategories = [];
         this.sizes = [];
         this.brands = [];
+        this.minPrice = 0;
+        this.maxPrice = 3000;
         for (let item of items) {
           if (!this.subcategories.some(x => x === item.subcategory)) {
             this.subcategories.push(item.subcategory)
@@ -71,8 +72,6 @@ export class CatGalleryComponent implements OnInit {
 
   filterChange() {
 
-
-
     if (this.minPrice < 0 || this.minPrice > this.maxPrice)
       this.minPrice = 0;
 
@@ -85,6 +84,8 @@ export class CatGalleryComponent implements OnInit {
       && (item.subcategory == this.selectedSubcategory || this.selectedSubcategory == "Show all")
       && (item.brand == this.selectedBrand || this.selectedBrand == "Show all")
       && (item.sizes.some(x => x.size == this.selectedSize && x.available > 0) || this.selectedSize == "Show all")
+      && (item.brand.toLowerCase().includes(this.searchPhase.toLowerCase())
+        || item.name.toLowerCase().includes(this.searchPhase.toLowerCase()))
     );
   }
 
