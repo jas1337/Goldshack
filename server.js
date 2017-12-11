@@ -4,8 +4,6 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const passport = require('passport');
 const mongoose = require('mongoose');
-// const session = require('express-session');
-// const MongoStore = require('connect-mongo')(session);
 
 //Configuration file
 const config = require('./config/database');
@@ -37,11 +35,6 @@ app.use(express.static(path.join(__dirname, 'assets')));
 app.use(cors());
 //Use Body Parser Middleware
 app.use(bodyParser.json());
-
-// app.use(session({
-//     secret: config.secret,
-//     store: new MongoStore({ mongooseConnection: mongoose.connection, ttl: 2 * 24 * 60 * 60 })
-// }));
 
 app.use(passport.initialize());
 app.use(passport.session());

@@ -41,10 +41,7 @@ export class CatItemComponent implements OnInit {
           this.router.navigate(['/404']);
         else {
           this.item = item;
-
         }
-
-
       },
       err => {
         console.log(err);
@@ -55,7 +52,6 @@ export class CatItemComponent implements OnInit {
         this.user = profile.user;
         this.user_id = profile.user.id
         this.shoppingCart = profile.user.shoppingCart;
-        console.log(this.shoppingCart)
       },
         err => {
           console.log(err);
@@ -76,9 +72,6 @@ export class CatItemComponent implements OnInit {
             price: this.item.price,
             sizes: this.item.sizes,
             img: this.item.imgs[0],
-            // details: this.item.details,
-            // category: this.item.category,
-            // subcategory: this.item.subcategory,
             sizeSelected: this.item.sizes[sizeSelected].size,
             quantity: 1
           }
@@ -95,11 +88,9 @@ export class CatItemComponent implements OnInit {
             }
           }
 
-
           this.shoppingService.addToCart(this.user, itemAdded)
             .subscribe(data => data)
           this.flashMessagesService.show('Item added to cart', { cssClass: 'alert-success', timeout: 1500 });
-          console.log(this.shoppingCart)
         } else {
           this.flashMessagesService.show('Sorry, the product has run out', { cssClass: 'alert-danger', timeout: 1500 });
         }

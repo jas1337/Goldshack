@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
-// import 'rxjs/add/observable/of';
 
 @Injectable()
 export class GalleryService {
@@ -30,7 +29,6 @@ export class GalleryService {
   }
 
   getItemsByCat(category: any): Observable<any> {
-
     return this.http.get('items/getItemByCat/' + category)
       .map(res => res.json());
   }

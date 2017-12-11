@@ -5,8 +5,6 @@
     </h1>
     <h3 class="font-italic">Let's start with the basics of building a man's wardrobe...</h3>
   </div>
-
-
   <div class="slideshow-container">
     <div class="" *ngFor="let image of images; let i = index">
       <div [ngClass]="{'hiddenSlides':selectedImageIndex !== i ,'fadeIn ' : selectedImageIndex === i}">

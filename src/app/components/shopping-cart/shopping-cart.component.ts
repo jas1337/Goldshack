@@ -52,9 +52,5 @@ export class ShoppingCartComponent implements OnInit {
 
     this.shoppingService.removeFromCart(this.user, itemRemoved)
       .subscribe(data => data)
-
-
-
   }
-
 }

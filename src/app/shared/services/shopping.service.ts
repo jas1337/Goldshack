@@ -60,5 +60,4 @@ export class ShoppingService {
     return this.http.put('users/updateCart/' + user.id, user, { headers: headers })
       .map(res => res.json());
   }
-
 }

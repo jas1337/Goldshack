@@ -42,13 +42,12 @@ export class CatGalleryComponent implements OnInit {
 
         this.items = items;
         this.itemsFiltered = items;
-
-        //Clear list of brands and sizes and put them by category
         this.subcategories = [];
         this.sizes = [];
         this.brands = [];
         this.minPrice = 0;
         this.maxPrice = 3000;
+
         for (let item of items) {
           if (!this.subcategories.some(x => x === item.subcategory)) {
             this.subcategories.push(item.subcategory)
@@ -68,8 +67,6 @@ export class CatGalleryComponent implements OnInit {
       });
   }
 
-
-
   filterChange() {
 
     if (this.minPrice < 0 || this.minPrice > this.maxPrice)
@@ -88,7 +85,4 @@ export class CatGalleryComponent implements OnInit {
         || item.name.toLowerCase().includes(this.searchPhase.toLowerCase()))
     );
   }
-
-
-
 }

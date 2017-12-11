@@ -1,6 +1,5 @@
 * {
   box-sizing: border-box;
-  /* cursor: default; */
 }
 
 .title {
@@ -142,6 +141,7 @@ a:hover {
 
 i {
   color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
 }
 
 i:hover {

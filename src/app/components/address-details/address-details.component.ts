@@ -63,11 +63,8 @@ export class AddressDetailsComponent implements OnInit {
       city: this.city,
       country: this.country
     }
-    //adding addres to user.addressList
-
     this.shoppingService.setLastAddress(this.user, fullAddress)
       .subscribe(data => data);
-
   }
 
 }

@@ -11,13 +11,11 @@ export class OrderService {
   addOrder(order: any) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    // console.log(order);
     return this.http.post('orders/addOrder', order, { headers: headers })
       .map(res => res.json());
   }
 
   getOrdersByUserId(id: any): Observable<any> {
-    // console.log(id)
     return this.http.get('orders/getOrdersByUserId/' + id)
       .map(res => res.json());
   }

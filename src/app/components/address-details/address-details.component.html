@@ -48,15 +48,11 @@
       <tbody>
         <div class="row" *ngFor="let fullAddress of user.addressList;let i = index" (click)="setAddress(i)">
           <div class="col-12 p-2 highlight">
-
             <h5>
               <strong>{{fullAddress.postalCode}}, {{fullAddress.city}}</strong>
             </h5>
             <h5>{{fullAddress.address}}</h5>
           </div>
-
-
-
         </div>
       </tbody>
     </table>

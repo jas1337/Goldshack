@@ -70,9 +70,7 @@ export class RegistrationComponent implements OnInit {
         this.router.navigate(['/']);
       } else {
         this.flashMessagesService.show(data.msg, { cssClass: 'alert-danger', timeout: 1500 });
-        // this.router.navigate(['/register']);
       }
     });
   }
-
 }

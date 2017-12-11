@@ -27,13 +27,12 @@ export class OrderSubmitComponent implements OnInit {
     private flashMessagesService: FlashMessagesService,
     private orderService: OrderService,
     private router: Router
-
   ) { }
 
   ngOnInit() {
     if (this.authService.loggedIn()) {
       this.authService.getProfile().subscribe(profile => {
-        if (profile.user.shoppingCart.length == 0)
+        if (profile.user.shoppingCart.length === 0)
           this.router.navigate(['/shopping-cart']);
 
         this.user = profile.user;
@@ -86,7 +85,6 @@ export class OrderSubmitComponent implements OnInit {
       .subscribe(data => data);
     this.flashMessagesService.show('Your order has been submitted', { cssClass: 'alert-success', timeout: 2000 });
     this.router.navigate(['/profile'])
-
   }
 
 }

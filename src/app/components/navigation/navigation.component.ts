@@ -22,16 +22,14 @@ export class NavigationComponent implements OnInit {
   isAdmin: boolean;
   loginForm: NgForm;
 
-
-  ngOnInit() {
-  }
-
-
   constructor(
     private authService: AuthService,
     private flashMessage: FlashMessagesService,
     private router: Router
   ) { }
+
+  ngOnInit() {
+  }
 
   onLoginSubmit() {
 
@@ -57,7 +55,6 @@ export class NavigationComponent implements OnInit {
     });
   }
 
-
   onLogoutClick() {
     this.authService.logout();
     this.flashMessage.show('You are logged out', {
@@ -67,6 +64,4 @@ export class NavigationComponent implements OnInit {
     this.router.navigate(['/']);
     return false;
   }
-
-
 }

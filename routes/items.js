@@ -3,33 +3,6 @@ const router = express.Router();
 const Item = require('../models/item');
 const mongoose = require('mongoose');
 
-// add or delete opinions
-router.put('/updateOpinions/:id', function (req, res, next) {
-  Item.update({
-    _id: req.params.id
-  }, {
-    $set: {
-      opinions: req.body.opinions
-    }
-  }, function (err, post) {
-    if (err) return next(err);
-    res.json(post);
-  });
-});
-
-router.put('/updateAvailability/:id', function (req, res, next) {
-  Item.update({
-    _id: req.params.id
-  }, {
-    $set: {
-      sizes: req.body.sizes
-    }
-  }, function (err, post) {
-    if (err) return next(err);
-    res.json(post);
-  });
-});
-
 // Add item to gallery
 router.post('/addItem', (req, res, next) => {
 
@@ -57,6 +30,20 @@ router.post('/addItem', (req, res, next) => {
         msg: 'Item added'
       });
     }
+  });
+});
+
+// add or delete opinions
+router.put('/updateOpinions/:id', function (req, res, next) {
+  Item.update({
+    _id: req.params.id
+  }, {
+    $set: {
+      opinions: req.body.opinions
+    }
+  }, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
   });
 });
 
