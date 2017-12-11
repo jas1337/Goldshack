@@ -18,7 +18,7 @@ export class NavigationComponent implements OnInit {
 
   email: string;
   password: string;
-  isCollapsed: boolean = true;
+  isCollapsed: boolean;
   isAdmin: boolean;
   loginForm: NgForm;
 
@@ -29,6 +29,10 @@ export class NavigationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+  }
+
+  onClick() {
+    this.isCollapsed = true
   }
 
   onLoginSubmit() {

@@ -37,19 +37,19 @@
   <div [ngClass]="{'show': isCollapsed == false}" class="collapse navbar-collapse" id="navbarColor02">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/category/clothing']">Clothing</a>
+        <a class="nav-link" (click)="onClick()" [routerLink]="['/category/clothing']">Clothing</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/category/footwear']">Footwear</a>
+        <a class="nav-link" (click)="onClick()" [routerLink]="['/category/footwear']">Footwear</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/category/sport']">Sport</a>
+        <a class="nav-link" (click)="onClick()" [routerLink]="['/category/sport']">Sport</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/category/accessories']">Accessories</a>
+        <a class="nav-link" (click)="onClick()" [routerLink]="['/category/accessories']">Accessories</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link red" [routerLink]="['/category/sale']">Sale!</a>
+        <a class="nav-link red" (click)="onClick()" [routerLink]="['/category/sale']">Sale!</a>
       </li>
     </ul>
   </div>
