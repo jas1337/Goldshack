@@ -3,6 +3,10 @@
   /* cursor: default; */
 }
 
+.title {
+  word-wrap: normal;
+}
+
 .red {
   color: #D9230F!important;
 }
