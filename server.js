@@ -10,7 +10,7 @@ const mongoose = require('mongoose');
 //Configuration file
 const config = require('./config/database');
 //Port number
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 
 const app = express();
 const users = require('./routes/users');
