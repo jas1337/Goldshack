@@ -6,17 +6,29 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class OrderService {
 
-  constructor(private http: Http) { }
+  isDev: boolean;
+  constructor(private http: Http) {
+    this.isDev = true;
+  }
 
   addOrder(order: any) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('orders/addOrder', order, { headers: headers })
+    let ep = this.prepEndpoint('orders/addOrder');
+    return this.http.post(ep, order, { headers: headers })
       .map(res => res.json());
   }
 
   getOrdersByUserId(id: any): Observable<any> {
-    return this.http.get('orders/getOrdersByUserId/' + id)
+    let ep = this.prepEndpoint('orders/getOrdersByUserId/');
+    return this.http.get(ep + id)
       .map(res => res.json());
+  }
+
+  prepEndpoint(ep) {
+    if (this.isDev)
+      return 'http://localhost:3000/' + ep;
+    else
+      return ep;
   }
 }

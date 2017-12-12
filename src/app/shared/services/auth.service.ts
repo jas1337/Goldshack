@@ -9,23 +9,25 @@ import { Observable } from 'rxjs/Observable';
 export class AuthService {
   authToken: any;
   user: any;
-
+  isDev: boolean;
   constructor(private http: Http) {
+    this.isDev = true;
   }
 
   registerUser(user: any) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('users/register', user, { headers: headers })
+    let ep = this.prepEndpoint('users/register');
+    return this.http.post(ep, user, { headers: headers })
       .map(res => res.json());
   }
 
   authenticateUser(user: any) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('users/authenticate', user, { headers: headers })
+    let ep = this.prepEndpoint('users/authenticate');
+    return this.http.post(ep, user, { headers: headers })
       .map(res => res.json());
-
   }
 
   getProfile() {
@@ -33,7 +35,8 @@ export class AuthService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.get('users/profile', { headers: headers })
+    let ep = this.prepEndpoint('users/profile');
+    return this.http.get(ep, { headers: headers })
       .map(res => res.json());
   }
 
@@ -58,5 +61,11 @@ export class AuthService {
     this.user = null;
     localStorage.clear();
     sessionStorage.clear();
+  }
+  prepEndpoint(ep) {
+    if (this.isDev)
+      return 'http://localhost:3000/' + ep;
+    else
+      return ep;
   }
 }

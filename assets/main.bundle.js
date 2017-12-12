@@ -1585,17 +1585,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var AuthService = (function () {
     function AuthService(http) {
         this.http = http;
+        this.isDev = true;
     }
     AuthService.prototype.registerUser = function (user) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        return this.http.post('users/register', user, { headers: headers })
+        var ep = this.prepEndpoint('users/register');
+        return this.http.post(ep, user, { headers: headers })
             .map(function (res) { return res.json(); });
     };
     AuthService.prototype.authenticateUser = function (user) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        return this.http.post('users/authenticate', user, { headers: headers })
+        var ep = this.prepEndpoint('users/authenticate');
+        return this.http.post(ep, user, { headers: headers })
             .map(function (res) { return res.json(); });
     };
     AuthService.prototype.getProfile = function () {
@@ -1603,7 +1606,8 @@ var AuthService = (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        return this.http.get('users/profile', { headers: headers })
+        var ep = this.prepEndpoint('users/profile');
+        return this.http.get(ep, { headers: headers })
             .map(function (res) { return res.json(); });
     };
     AuthService.prototype.storeUserData = function (token, user) {
@@ -1624,6 +1628,12 @@ var AuthService = (function () {
         this.user = null;
         localStorage.clear();
         sessionStorage.clear();
+    };
+    AuthService.prototype.prepEndpoint = function (ep) {
+        if (this.isDev)
+            return 'http://localhost:3000/' + ep;
+        else
+            return ep;
     };
     AuthService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
@@ -1659,27 +1669,38 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var GalleryService = (function () {
     function GalleryService(http) {
         this.http = http;
+        this.isDev = true;
     }
     GalleryService.prototype.updateOpinions = function (item) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        return this.http.put('items/updateOpinions/' + item._id, item, { headers: headers })
+        var ep = this.prepEndpoint('items/updateOpinions/');
+        return this.http.put(ep + item._id, item, { headers: headers })
             .map(function (res) { return res.json(); });
     };
     GalleryService.prototype.updateAvailability = function (item) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         console.log(item);
         headers.append('Content-Type', 'application/json');
-        return this.http.put('items/updateAvailability/' + item._id, item, { headers: headers })
+        var ep = this.prepEndpoint('items/updateAvailability/');
+        return this.http.put(ep + item._id, item, { headers: headers })
             .map(function (res) { return res.json(); });
     };
     GalleryService.prototype.getItemById = function (_id) {
-        return this.http.get('items/getItemById/' + _id)
+        var ep = this.prepEndpoint('items/getItemById/');
+        return this.http.get(ep + _id)
             .map(function (res) { return res.json(); });
     };
     GalleryService.prototype.getItemsByCat = function (category) {
-        return this.http.get('items/getItemByCat/' + category)
+        var ep = this.prepEndpoint('items/getItemByCat/');
+        return this.http.get(ep + category)
             .map(function (res) { return res.json(); });
+    };
+    GalleryService.prototype.prepEndpoint = function (ep) {
+        if (this.isDev)
+            return 'http://localhost:3000/' + ep;
+        else
+            return ep;
     };
     GalleryService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
@@ -1715,16 +1736,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var OrderService = (function () {
     function OrderService(http) {
         this.http = http;
+        this.isDev = true;
     }
     OrderService.prototype.addOrder = function (order) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        return this.http.post('orders/addOrder', order, { headers: headers })
+        var ep = this.prepEndpoint('orders/addOrder');
+        return this.http.post(ep, order, { headers: headers })
             .map(function (res) { return res.json(); });
     };
     OrderService.prototype.getOrdersByUserId = function (id) {
-        return this.http.get('orders/getOrdersByUserId/' + id)
+        var ep = this.prepEndpoint('orders/getOrdersByUserId/');
+        return this.http.get(ep + id)
             .map(function (res) { return res.json(); });
+    };
+    OrderService.prototype.prepEndpoint = function (ep) {
+        if (this.isDev)
+            return 'http://localhost:3000/' + ep;
+        else
+            return ep;
     };
     OrderService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
@@ -1760,11 +1790,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var ShoppingService = (function () {
     function ShoppingService(http) {
         this.http = http;
+        this.isDev = true;
     }
     //updates user.addressList - data from form in address-details
     ShoppingService.prototype.addAddress = function (user, fullAddress) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
+        var ep = this.prepEndpoint('users/updateAddressList/');
         //checks whether the address already exists in addtessList
         var addressExist = user.addressList.some(function (x) {
             return x.address === fullAddress.address &&
@@ -1775,37 +1807,47 @@ var ShoppingService = (function () {
         if (!addressExist) {
             user.addressList.push(fullAddress);
         }
-        return this.http.put('users/updateAddressList/' + user.id, user, { headers: headers })
+        return this.http.put(ep + user.id, user, { headers: headers })
             .map(function (res) { return res.json(); });
     };
     ShoppingService.prototype.setLastAddress = function (user, lastAddress) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
+        var ep = this.prepEndpoint('users/setLastAddress/');
         user.lastAddress = lastAddress;
-        return this.http.put('users/setLastAddress/' + user.id, user, { headers: headers })
+        return this.http.put(ep + user.id, user, { headers: headers })
             .map(function (res) { return res.json(); });
     };
     //Adds item to user.shoppingCart 
     ShoppingService.prototype.addToCart = function (user, itemAdded) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
+        var ep = this.prepEndpoint('users/updateCart/');
         user.shoppingCart.push(itemAdded);
-        return this.http.put('users/updateCart/' + user.id, user, { headers: headers })
+        return this.http.put(ep + user.id, user, { headers: headers })
             .map(function (res) { return res.json(); });
     };
     ShoppingService.prototype.removeFromCart = function (user, itemRemoved) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
+        var ep = this.prepEndpoint('users/updateCart/');
         user.shoppingCart.splice(itemRemoved, 1);
-        return this.http.put('users/updateCart/' + user.id, user, { headers: headers })
+        return this.http.put(ep + user.id, user, { headers: headers })
             .map(function (res) { return res.json(); });
     };
     ShoppingService.prototype.clearCart = function (user) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
+        var ep = this.prepEndpoint('users/updateCart/');
         user.shoppingCart = [];
-        return this.http.put('users/updateCart/' + user.id, user, { headers: headers })
+        return this.http.put(ep + user.id, user, { headers: headers })
             .map(function (res) { return res.json(); });
+    };
+    ShoppingService.prototype.prepEndpoint = function (ep) {
+        if (this.isDev)
+            return 'http://localhost:3000/' + ep;
+        else
+            return ep;
     };
     ShoppingService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),

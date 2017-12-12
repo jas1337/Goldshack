@@ -6,12 +6,16 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class GalleryService {
 
-  constructor(private http: Http) { }
+  isDev: boolean;
+  constructor(private http: Http) {
+    this.isDev = true;
+  }
 
   updateOpinions(item: any) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.put('items/updateOpinions/' + item._id, item, { headers: headers })
+    let ep = this.prepEndpoint('items/updateOpinions/');
+    return this.http.put(ep + item._id, item, { headers: headers })
       .map(res => res.json());
   }
 
@@ -19,18 +23,27 @@ export class GalleryService {
     let headers = new Headers();
     console.log(item)
     headers.append('Content-Type', 'application/json');
-    return this.http.put('items/updateAvailability/' + item._id, item, { headers: headers })
+    let ep = this.prepEndpoint('items/updateAvailability/');
+    return this.http.put(ep + item._id, item, { headers: headers })
       .map(res => res.json());
   }
 
   getItemById(_id: any): Observable<any> {
-    return this.http.get('items/getItemById/' + _id)
+    let ep = this.prepEndpoint('items/getItemById/');
+    return this.http.get(ep + _id)
       .map(res => res.json());
   }
 
   getItemsByCat(category: any): Observable<any> {
-    return this.http.get('items/getItemByCat/' + category)
+    let ep = this.prepEndpoint('items/getItemByCat/');
+    return this.http.get(ep + category)
       .map(res => res.json());
+  }
+  prepEndpoint(ep) {
+    if (this.isDev)
+      return 'http://localhost:3000/' + ep;
+    else
+      return ep;
   }
 
 }
