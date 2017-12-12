@@ -9,7 +9,8 @@ export class ShoppingService {
 
   isDev: boolean;
   constructor(private http: Http) {
-    this.isDev = true;
+    // this.isDev = true;
+    this.isDev = false;
   }
 
   //updates user.addressList - data from form in address-details

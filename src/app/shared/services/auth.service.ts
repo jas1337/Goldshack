@@ -11,7 +11,8 @@ export class AuthService {
   user: any;
   isDev: boolean;
   constructor(private http: Http) {
-    this.isDev = true;
+    // this.isDev = true;
+    this.isDev = false;
   }
 
   registerUser(user: any) {

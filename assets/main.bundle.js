@@ -1585,7 +1585,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var AuthService = (function () {
     function AuthService(http) {
         this.http = http;
-        this.isDev = true;
+        // this.isDev = true;
+        this.isDev = false;
     }
     AuthService.prototype.registerUser = function (user) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
@@ -1669,7 +1670,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var GalleryService = (function () {
     function GalleryService(http) {
         this.http = http;
-        this.isDev = true;
+        // this.isDev = true;
+        this.isDev = false;
     }
     GalleryService.prototype.updateOpinions = function (item) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
@@ -1736,7 +1738,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var OrderService = (function () {
     function OrderService(http) {
         this.http = http;
-        this.isDev = true;
+        // this.isDev = true;
+        this.isDev = false;
     }
     OrderService.prototype.addOrder = function (order) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
@@ -1790,7 +1793,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var ShoppingService = (function () {
     function ShoppingService(http) {
         this.http = http;
-        this.isDev = true;
+        // this.isDev = true;
+        this.isDev = false;
     }
     //updates user.addressList - data from form in address-details
     ShoppingService.prototype.addAddress = function (user, fullAddress) {
