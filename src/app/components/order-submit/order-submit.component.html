@@ -29,7 +29,8 @@
             </h5>
             <h5>Size: {{item.sizeSelected}}</h5>
             <h5>Quantity: x{{item.quantity}}</h5>
-            <h4>{{item.price | currency:'PLN '}}</h4>
+            <h4 *ngIf="!item.newPrice">{{item.price | currency:'PLN '}}</h4>
+            <h4 class="red" *ngIf="item.newPrice"> {{item.newPrice | currency:'PLN '}}</h4>
           </td>
         </tr>
       </tbody>

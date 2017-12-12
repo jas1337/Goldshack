@@ -13,8 +13,9 @@
         <strong>{{item.brand}}</strong>
       </h3>
       <h5>{{item.name}}</h5>
-      <h4>
-        <strong>{{item.price | currency:'PLN '}} </strong>
+      <h4 [ngClass]="{'sale': item.newPrice}">
+        PLN {{item.price }}
+        <label class="red" *ngIf="item.newPrice"> &nbsp;PLN {{item.newPrice }}</label>
       </h4>
 
       <form (submit)="addToCart(sizeSelect.value); buyForm.reset()" #buyForm="ngForm">
