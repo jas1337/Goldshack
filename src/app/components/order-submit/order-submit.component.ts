@@ -38,8 +38,12 @@ export class OrderSubmitComponent implements OnInit {
         this.user = profile.user;
         this.lastAddress = profile.user.lastAddress;
 
-        for (let item of profile.user.shoppingCart)
-          this.totalPrice += (item.price * item.quantity);
+        for (let item of profile.user.shoppingCart) {
+          if (item.newPrice)
+            this.totalPrice += (item.quantity * item.newPrice);
+          else
+            this.totalPrice += (item.quantity * item.price);
+        }
       },
         err => {
           console.log(err);

@@ -44,7 +44,7 @@ export class HomePageComponent implements OnInit {
       this.selectedImageIndex = 0;
   }
   previousImage() {
-    if (this.selectedImageIndex - 1 > 0) {
+    if (this.selectedImageIndex - 1 >= 0) {
       this.selectedImageIndex = this.selectedImageIndex - 1;
     } else
       this.selectedImageIndex = this.images.length - 1;

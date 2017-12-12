@@ -30,8 +30,15 @@ export class ShoppingCartComponent implements OnInit {
         this.user = profile.user;
         this.shoppingCart = profile.user.shoppingCart;
 
-        for (let item of this.shoppingCart)
-          this.totalPrice += (item.quantity * item.price);
+        for (let item of this.shoppingCart) {
+          if (item.newPrice)
+            this.totalPrice += (item.quantity * item.newPrice);
+          else
+            this.totalPrice += (item.quantity * item.price);
+        }
+
+
+
 
         if (!this.authService.loggedIn()) {
           this.router.navigate(['/']);
@@ -48,7 +55,11 @@ export class ShoppingCartComponent implements OnInit {
 
   removeFromCart(itemRemoved) {
 
-    this.totalPrice -= (this.shoppingCart[itemRemoved].quantity * this.shoppingCart[itemRemoved].price);
+
+    if (this.shoppingCart[itemRemoved].newPrice)
+      this.totalPrice -= (this.shoppingCart[itemRemoved].quantity * this.shoppingCart[itemRemoved].newPrice);
+    else
+      this.totalPrice -= (this.shoppingCart[itemRemoved].quantity * this.shoppingCart[itemRemoved].price);
 
     this.shoppingService.removeFromCart(this.user, itemRemoved)
       .subscribe(data => data)
