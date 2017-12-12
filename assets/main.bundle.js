@@ -865,7 +865,7 @@ var HomePageComponent = (function () {
             this.selectedImageIndex = 0;
     };
     HomePageComponent.prototype.previousImage = function () {
-        if (this.selectedImageIndex - 1 > 0) {
+        if (this.selectedImageIndex - 1 >= 0) {
             this.selectedImageIndex = this.selectedImageIndex - 1;
         }
         else
@@ -1070,7 +1070,10 @@ var OrderSubmitComponent = (function () {
                 _this.lastAddress = profile.user.lastAddress;
                 for (var _i = 0, _a = profile.user.shoppingCart; _i < _a.length; _i++) {
                     var item = _a[_i];
-                    _this.totalPrice += (item.price * item.quantity);
+                    if (item.newPrice)
+                        _this.totalPrice += (item.quantity * item.newPrice);
+                    else
+                        _this.totalPrice += (item.quantity * item.price);
                 }
             }, function (err) {
                 console.log(err);
@@ -1408,7 +1411,10 @@ var ShoppingCartComponent = (function () {
                 _this.shoppingCart = profile.user.shoppingCart;
                 for (var _i = 0, _a = _this.shoppingCart; _i < _a.length; _i++) {
                     var item = _a[_i];
-                    _this.totalPrice += (item.quantity * item.price);
+                    if (item.newPrice)
+                        _this.totalPrice += (item.quantity * item.newPrice);
+                    else
+                        _this.totalPrice += (item.quantity * item.price);
                 }
                 if (!_this.authService.loggedIn()) {
                     _this.router.navigate(['/']);
@@ -1423,7 +1429,10 @@ var ShoppingCartComponent = (function () {
         }
     };
     ShoppingCartComponent.prototype.removeFromCart = function (itemRemoved) {
-        this.totalPrice -= (this.shoppingCart[itemRemoved].quantity * this.shoppingCart[itemRemoved].price);
+        if (this.shoppingCart[itemRemoved].newPrice)
+            this.totalPrice -= (this.shoppingCart[itemRemoved].quantity * this.shoppingCart[itemRemoved].newPrice);
+        else
+            this.totalPrice -= (this.shoppingCart[itemRemoved].quantity * this.shoppingCart[itemRemoved].price);
         this.shoppingService.removeFromCart(this.user, itemRemoved)
             .subscribe(function (data) { return data; });
     };
