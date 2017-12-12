@@ -70,10 +70,14 @@ export class CatItemComponent implements OnInit {
             brand: this.item.brand,
             name: this.item.name,
             price: this.item.price,
+            newPrice: undefined,
             sizes: this.item.sizes,
             img: this.item.imgs[0],
             sizeSelected: this.item.sizes[sizeSelected].size,
             quantity: 1
+          }
+          if (this.item.newPrice) {
+            itemAdded.newPrice = this.item.newPrice
           }
 
           let itemFromCart = (this.shoppingCart.find(x => x._id === this.item._id

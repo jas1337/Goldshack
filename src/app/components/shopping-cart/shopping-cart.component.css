@@ -1,10 +1,1 @@
-table {
-    table-layout: fixed;
-}
 
-td:first-child {
-    width: 20%;
-}
-td:last-child {
-    width: 10%;
-}

@@ -44,17 +44,13 @@
     <hr>
     <h3>Previously used addresses</h3>
     <h5 *ngIf="user.addressList?.length === 0"> There are no addresses yet</h5>
-    <table class="table table-hover ">
-      <tbody>
-        <div class="row" *ngFor="let fullAddress of user.addressList;let i = index" (click)="setAddress(i)">
-          <div class="col-12 p-2 highlight">
-            <h5>
-              <strong>{{fullAddress.postalCode}}, {{fullAddress.city}}</strong>
-            </h5>
-            <h5>{{fullAddress.address}}</h5>
-          </div>
-        </div>
-      </tbody>
-    </table>
+    <div class="row" *ngFor="let fullAddress of user.addressList;let i = index" (click)="setAddress(i)">
+      <div class="col-12 p-2 highlight">
+        <h5>
+          <strong>{{fullAddress.postalCode}}, {{fullAddress.city}}</strong>
+        </h5>
+        <h5>{{fullAddress.address}}</h5>
+      </div>
+    </div>
   </div>
 </div>
