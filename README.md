@@ -1,27 +1,16 @@
 # Goldshack
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.0.
+ <h5>Non-commercial project e-commerce web store application – dynamic, single page application. </h5>
+<p> Allows registering user, shopping, adding opinions and submit orders. Data is
+distributed basing on user authorization service.</p>
 
-## Development server
+DEMO: https://secure-crag-65760.herokuapp.com/
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+<h5>Used technologies:</h5>
+<p>MongoDB (mongoose) – data storage, CRUD operations; </p>
+<p>Express.js – REST API routing; </p>
+<p>Angular2+ (typescript) - component based MVC architecture programming; </p>
+<p>HTML5&CSS3 - constructing responsive views;</p> 
+<p>Node.js - setting server,database connection; </p>
+<p>Passport.js - user authentication; </p>
+<p>Heroku – deploy </p>
