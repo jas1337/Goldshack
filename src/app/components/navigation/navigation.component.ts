@@ -49,7 +49,6 @@ export class NavigationComponent implements OnInit {
           cssClass: 'alert-success',
           timeout: 1500
         });
-        this.router.navigate(['/']);
       } else {
         this.flashMessage.show(data.msg, {
           cssClass: 'alert-danger',

@@ -689,7 +689,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/errors/not-found/not-found.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"text-center m-5\" >\n  <p class=\"fa fa-bomb\" style=\"font-size:200px;\" aria-hidden=\"true\">404 </p>\n  <h1>Congratulations. You broke it.</h1>\n</div>\n"
+module.exports = "<div class=\"text-center m-5\">\n  <p class=\"fa fa-bomb\" style=\"font-size:200px;\" aria-hidden=\"true\"></p>\n  <h1>Error 404: Congratulations. You broke it.</h1>\n</div>\n"
 
 /***/ }),
 
@@ -962,7 +962,6 @@ var NavigationComponent = (function () {
                     cssClass: 'alert-success',
                     timeout: 1500
                 });
-                _this.router.navigate(['/']);
             }
             else {
                 _this.flashMessage.show(data.msg, {
