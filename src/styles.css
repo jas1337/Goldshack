@@ -7,12 +7,12 @@
 }
 
 .red {
-  color: #D9230F!important;
+  color: #D9230F !important;
 }
 
 hr {
-  margin-top: 5px!important;
-  margin-bottom: 5px!important;
+  margin-top: 5px !important;
+  margin-bottom: 5px !important;
 }
 
 .highlight:hover {
@@ -41,7 +41,7 @@ hr {
   width: auto;
   margin-top: -22px;
   padding: 16px;
-  color: #D9230F!important;
+  color: #D9230F !important;
   font-weight: bold;
   font-size: 35px;
   transition: 0.6s ease;
@@ -56,7 +56,7 @@ hr {
 .prev:hover,
 .next:hover {
   background-color: #D9230F;
-  color: white!important;
+  color: white !important;
 }
 
 .text {
@@ -111,13 +111,9 @@ ul {
   padding: 10px;
 }
 
-.btn-outline-primary {
-  width: 100px;
-}
-
 .flash-message {
   font-size: 1.5em;
-  position: fixed!important;
+  position: fixed !important;
   top: 20px;
   text-align: center;
   z-index: 10000;
@@ -148,6 +144,11 @@ i:hover {
   color: rgba(0, 0, 0, 0.9);
 }
 
+.fa {
+  font-size: 2rem;
+  margin: 5px;
+}
+
 .item-img {
   width: 100%;
 }
@@ -155,4 +156,8 @@ i:hover {
 .item-img-small {
   width: 100%;
   max-width: 120px;
+}
+
+.table td {
+  border: none;
 }

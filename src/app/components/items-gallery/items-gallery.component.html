@@ -1,0 +1,78 @@
+<div class="text-center my-4">
+  <h2>
+    <strong>{{category | uppercase }}</strong>
+  </h2>
+</div>
+<div class="row">
+  <div class="col-md-2 my-1">
+    <div class="form-group">
+      <label>Subcategory</label>
+      <select class="form-control" (change)="filterChange()" [(ngModel)]="selectedSubcategory" name="selectedSubcategory">
+        <option>Show all</option>
+        <option *ngFor="let subcategory of subcategories">{{subcategory}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-md-2 my-1">
+    <div class="form-group">
+      <label>Brand</label>
+      <select class="form-control" (change)="filterChange()" [(ngModel)]="selectedBrand" name="selectedBrand">
+        <option>Show all</option>
+        <option *ngFor="let brand of brands">{{brand}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-md-2 my-1">
+    <div class="form-group">
+      <label>Price-Min:</label>
+      <input class="form-control form-control" (change)="filterChange()" [(ngModel)]="minPrice" name="minPrice" type="number" step="10"
+        placeholder="0" max="{{maxPrice}}" min="0">
+    </div>
+  </div>
+  <div class="col-md-2 my-1">
+    <div class="form-group">
+      <label>Price-Max:</label>
+      <input class="form-control form-control" (change)="filterChange()" [(ngModel)]="maxPrice" name="maxPrice" type="number" step="10"
+        placeholder="3000" min="{{minPrice}}">
+    </div>
+  </div>
+  <div class="col-md-2 my-1">
+    <div class="form-group">
+      <label>Size</label>
+      <select class="form-control" (change)="filterChange()" [(ngModel)]="selectedSize" name="selectedSize">
+        <option>Show all</option>
+        <option *ngFor="let size of sizes">{{size}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-md-2 my-1">
+    <div class="form-group">
+      <label class="red">Search...</label>
+      <input class="form-control red" type="text" placeholder="Search phase" (keyup)="filterChange()" [(ngModel)]="searchPhase"
+        name="searchPhase">
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3 my-2" *ngFor="let item of itemsFiltered">
+    <a [routerLink]="['/item', item._id]">
+      <img class="item-img" src="{{item.imgs[0]}}">
+
+      <h5>
+        <strong>{{item.brand}}</strong>
+      </h5>
+      <h5>{{item.name | truncate}} </h5>
+      <div class="float-right">
+        <h5 [ngClass]="{'sale': item.newPrice}">
+          PLN {{item.price }}
+          <label class="red" *ngIf="item.newPrice"> &nbsp;PLN {{item.newPrice }}</label>
+        </h5>
+
+      </div>
+    </a>
+  </div>
+</div>
+<div *ngIf="itemsFiltered?.length === 0" class="text-center m-5">
+  <p class="fa fa-search" style="font-size:200px;" aria-hidden="true"> </p>
+  <h1>No results found.</h1>
+</div>

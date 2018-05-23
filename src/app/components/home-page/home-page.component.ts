@@ -7,26 +7,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePageComponent implements OnInit {
 
-  selectedImageIndex: number = 0;
+  selectedImageIndex = 0;
   images: any[] = [{
-    url: "https://static.pexels.com/photos/297933/pexels-photo-297933.jpeg",
-    category: "clothing",
-    text: "Men's clothing, men's clothes tailored to your needs."
+    url: `https://static.pexels.com/photos/297933/pexels-photo-297933.jpeg`,
+    category: 'clothing',
+    text: `Men's clothing, men's clothes tailored to your needs.`
   },
   {
-    url: "https://static.pexels.com/photos/404168/pexels-photo-404168.jpeg",
-    category: "footwear",
-    text: "Men's shoes give character to the whole stylization and this is what you pay attention to at the first moment. Meet comfortable and modern models that will make you look even better."
+    url: `https://static.pexels.com/photos/404168/pexels-photo-404168.jpeg`,
+    category: 'footwear',
+    text: `Men's shoes give character to the whole stylization and this is what you pay attention to at the first moment.
+    Meet comfortable and modern models that will make you look even better.`
   },
   {
-    url: "https://static.pexels.com/photos/685530/pexels-photo-685530.jpeg",
-    category: "sport",
-    text: "Properly selected men's sports clothing and footwear today is almost half of the success in each discipline! "
+    url: `https://static.pexels.com/photos/685530/pexels-photo-685530.jpeg`,
+    category: 'sport',
+    text: `Properly selected men's sports clothing and footwear today is almost half of the success in each discipline! `
   },
   {
-    url: "https://static.pexels.com/photos/322207/pexels-photo-322207.jpeg",
-    category: "accessories",
-    text: "Men's accessories and accessories that tempt with a flash and encourage high quality."
+    url: `https://static.pexels.com/photos/322207/pexels-photo-322207.jpeg`,
+    category: `accessories`,
+    text: `Men's accessories and accessories that tempt with a flash and encourage high quality.`
   }];
   constructor() { }
 
@@ -40,13 +41,15 @@ export class HomePageComponent implements OnInit {
   nextImage() {
     if (this.selectedImageIndex + 1 < this.images.length) {
       this.selectedImageIndex = this.selectedImageIndex + 1;
-    } else
+    } else {
       this.selectedImageIndex = 0;
+    }
   }
   previousImage() {
     if (this.selectedImageIndex - 1 >= 0) {
       this.selectedImageIndex = this.selectedImageIndex - 1;
-    } else
+    } else {
       this.selectedImageIndex = this.images.length - 1;
+    }
   }
 }

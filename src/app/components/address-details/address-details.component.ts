@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { AuthService } from '../../shared/services/auth.service';
-import { ShoppingService } from '../../shared/services/shopping.service';
+import { AuthService } from '../../services/auth.service';
+import { ShoppingService } from '../../services/shopping.service';
 
 @Component({
   selector: 'app-address-details',
   templateUrl: './address-details.component.html',
   styleUrls: ['./address-details.component.css'],
+  providers: [AuthService, ShoppingService]
   // encapsulation: ViewEncapsulation.None
 })
 export class AddressDetailsComponent implements OnInit {
@@ -37,8 +38,9 @@ export class AddressDetailsComponent implements OnInit {
           this.city = profile.user.lastAddress.city;
           this.country = profile.user.lastAddress.country;
         }
-        if (profile.user.shoppingCart.length == 0)
+        if (profile.user.shoppingCart.length === 0) {
           this.router.navigate(['/shopping-cart']);
+        }
       },
         err => {
           console.log(err);
@@ -50,19 +52,19 @@ export class AddressDetailsComponent implements OnInit {
   }
 
   setAddress(i) {
-    this.address = this.user.addressList[i].address,
-      this.postalCode = this.user.addressList[i].postalCode,
-      this.city = this.user.addressList[i].city,
-      this.country = this.user.addressList[i].country
+    this.address = this.user.addressList[i].address;
+    this.postalCode = this.user.addressList[i].postalCode;
+    this.city = this.user.addressList[i].city;
+    this.country = this.user.addressList[i].country;
   }
 
   submitAddress() {
-    let fullAddress = {
+    const fullAddress = {
       address: this.address,
       postalCode: this.postalCode,
       city: this.city,
       country: this.country
-    }
+    };
     this.shoppingService.setLastAddress(this.user, fullAddress)
       .subscribe(data => data);
   }

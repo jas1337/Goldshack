@@ -1,33 +1,20 @@
 <div class="row">
   <div class="col-md-4">
     <a class="navbar-brand" [routerLink]="['/']">
-      <h2>GoldShack demo*</h2>
+      <h2>{{ 'GLOBAL.TITLE' | translate}}</h2>
     </a>
   </div>
   <div class="col-md-8 ">
-    <form class="form-inline my-2 float-right" #loginForm="ngForm" (submit)="onLoginSubmit()">
-      <input class="form-control mr-sm-2" *ngIf="!authService.loggedIn()" [(ngModel)]="email" name="email" type="text" placeholder="Email"
-        required>
-      <input class="form-control mr-sm-2" *ngIf="!authService.loggedIn()" [(ngModel)]="password" name="password" type="password"
-        placeholder="Password" required>
-      <button class="btn btn-outline-primary my-2 " *ngIf="!authService.loggedIn()" type="submit" [disabled]="loginForm.invalid">Log in</button>
-      <a class="mx-2" *ngIf="!authService.loggedIn()" [routerLink]="['/registration']">
-        <h1>
-          <i class="fa fa-user-plus" aria-hidden="true"></i>
-        </h1>
-      </a>
+    <div class="form-inline my-2 float-right">
       <a [routerLink]="['/shopping-cart']" *ngIf="authService.loggedIn()">
-        <h1>
-          <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-        </h1>
+        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
       </a>
       <a class="mx-2" [routerLink]="['/profile']" *ngIf="authService.loggedIn()">
-        <h1>
-          <i class="fa fa-user" aria-hidden="true"></i>
-        </h1>
+        <i class="fa fa-user" aria-hidden="true"></i>
       </a>
-      <button class="btn btn-outline-primary my-2 " *ngIf="authService.loggedIn()" (click)="onLogoutClick()" type="submit">Log out</button>
-    </form>
+      <i class="fa fa-sign-in" *ngIf="!authService.loggedIn()" (click)="openModal()"></i>
+      <i class="fa fa-sign-out" *ngIf="authService.loggedIn()" (click)="onLogoutClick()" aria-hidden="true"></i>
+    </div>
   </div>
 </div>
 <nav class="navbar navbar-expand-md navbar-light bg-light">

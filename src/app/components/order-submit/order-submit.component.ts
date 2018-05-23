@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthService } from '../../shared/services/auth.service';
-import { ShoppingService } from '../../shared/services/shopping.service';
-import { OrderService } from '../../shared/services/order.service';
+import { AuthService } from '../../services/auth.service';
+import { ShoppingService } from '../../services/shopping.service';
+import { OrderService } from '../../services/order.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
-import { GalleryService } from '../../shared/services/gallery.service';
+import { GalleryService } from '../../services/gallery.service';
 
 @Component({
   selector: 'app-order-submit',
@@ -32,17 +32,18 @@ export class OrderSubmitComponent implements OnInit {
   ngOnInit() {
     if (this.authService.loggedIn()) {
       this.authService.getProfile().subscribe(profile => {
-        if (profile.user.shoppingCart.length === 0)
+        if (profile.user.shoppingCart.length === 0) {
           this.router.navigate(['/shopping-cart']);
-
+        }
         this.user = profile.user;
         this.lastAddress = profile.user.lastAddress;
 
-        for (let item of profile.user.shoppingCart) {
-          if (item.newPrice)
+        for (const item of profile.user.shoppingCart) {
+          if (item.newPrice) {
             this.totalPrice += (item.quantity * item.newPrice);
-          else
+          } else {
             this.totalPrice += (item.quantity * item.price);
+          }
         }
       },
         err => {
@@ -57,7 +58,7 @@ export class OrderSubmitComponent implements OnInit {
 
   submitOrder() {
 
-    let newOrder = {
+    const newOrder = {
       userId: this.user.id,
       firstName: this.user.firstName,
       lastName: this.user.lastName,
@@ -68,10 +69,10 @@ export class OrderSubmitComponent implements OnInit {
       fullAddress: this.user.lastAddress
     };
 
-    for (let itemFromCart of newOrder.shoppingCart) {
+    for (const itemFromCart of newOrder.shoppingCart) {
 
-      let size = itemFromCart.sizes.find(x => x.size === itemFromCart.sizeSelected)
-      let index = itemFromCart.sizes.indexOf(size);
+      const size = itemFromCart.sizes.find(x => x.size === itemFromCart.sizeSelected);
+      const index = itemFromCart.sizes.indexOf(size);
       itemFromCart.sizes[index].available -= itemFromCart.quantity;
 
       this.galleryService.updateAvailability(itemFromCart)
@@ -88,7 +89,7 @@ export class OrderSubmitComponent implements OnInit {
     this.shoppingService.addAddress(this.user, this.user.lastAddress)
       .subscribe(data => data);
     this.flashMessagesService.show('Your order has been submitted', { cssClass: 'alert-success', timeout: 2000 });
-    this.router.navigate(['/profile'])
+    this.router.navigate(['/profile']);
   }
 
 }

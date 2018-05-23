@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthService } from '../../shared/services/auth.service';
-import { OrderService } from '../../shared/services/order.service';
+import { AuthService } from '../../services/auth.service';
+import { OrderService } from '../../services/order.service';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -29,8 +29,7 @@ export class ProfileComponent implements OnInit {
         this.user = profile.user;
 
         this.orderService.getOrdersByUserId(this.user.id).subscribe(orders => {
-          this.orders = orders
-
+          this.orders = orders;
         });
       },
         err => {

@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Router } from '@angular/router';
 
-import { AuthService } from '../../shared/services/auth.service';
-import { ShoppingService } from '../../shared/services/shopping.service';
+import { AuthService } from '../../services/auth.service';
+import { ShoppingService } from '../../services/shopping.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -30,15 +30,13 @@ export class ShoppingCartComponent implements OnInit {
         this.user = profile.user;
         this.shoppingCart = profile.user.shoppingCart;
 
-        for (let item of this.shoppingCart) {
-          if (item.newPrice)
+        for (const item of this.shoppingCart) {
+          if (item.newPrice) {
             this.totalPrice += (item.quantity * item.newPrice);
-          else
+          } else {
             this.totalPrice += (item.quantity * item.price);
+          }
         }
-
-
-
 
         if (!this.authService.loggedIn()) {
           this.router.navigate(['/']);
@@ -55,13 +53,13 @@ export class ShoppingCartComponent implements OnInit {
 
   removeFromCart(itemRemoved) {
 
-
-    if (this.shoppingCart[itemRemoved].newPrice)
+    if (this.shoppingCart[itemRemoved].newPrice) {
       this.totalPrice -= (this.shoppingCart[itemRemoved].quantity * this.shoppingCart[itemRemoved].newPrice);
-    else
+    } else {
       this.totalPrice -= (this.shoppingCart[itemRemoved].quantity * this.shoppingCart[itemRemoved].price);
+    }
 
     this.shoppingService.removeFromCart(this.user, itemRemoved)
-      .subscribe(data => data)
+      .subscribe(data => data);
   }
 }

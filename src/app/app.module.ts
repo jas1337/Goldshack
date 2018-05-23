@@ -3,57 +3,73 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { HttpModule } from '@angular/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+// import { Translate } from './constants/translate';
+
+import { RoutingModule } from './routing/routing.module';
+
+import { ValidateService } from './services/validate.service';
+import { AuthService } from './services/auth.service';
+import { GalleryService } from './services/gallery.service';
+import { ShoppingService } from './services/shopping.service';
+import { OrderService } from './services/order.service';
+
+import { TruncatePipe } from './pipes/truncate.pipe';
 
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { FooterComponent } from './components/footer/footer.component';
-
-
-import { CatGalleryComponent } from './components/category/cat-gallery/cat-gallery.component';
-import { RegistrationComponent } from './components/registration/registration.component'
-
-import { RoutingModule } from './shared/routing/routing.module';
-import { ValidateService } from './shared/services/validate.service';
-import { AuthService } from './shared/services/auth.service';
-import { GalleryService } from './shared/services/gallery.service';
-import { ShoppingService } from './shared/services/shopping.service';
-import { OrderService } from './shared/services/order.service';
-
-import { TruncatePipe } from './shared/pipes/truncate.pipe';
-import { CatItemComponent } from './components/category/cat-item/cat-item.component';
+import { ItemsGalleryComponent } from './components/items-gallery/items-gallery.component';
+import { RegistrationComponent } from './components/registration/registration.component';
+import { SingleItemComponent } from './components/single-item/single-item.component';
 import { NotFoundComponent } from './components/errors/not-found/not-found.component';
-import { ItemOpinionsComponent } from './components/category/cat-item/item-opinions/item-opinions.component';
+import { ItemOpinionsComponent } from './components/single-item/item-opinions/item-opinions.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { AddressDetailsComponent } from './components/address-details/address-details.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { OrderSubmitComponent } from './components/order-submit/order-submit.component';
+import { SidebarNavigationComponent } from './components/sidebar-navigation/sidebar-navigation.component';
+import { LoginModalComponent } from './components/modals/login-modal/login-modal.component';
+import { TranslatePipe } from './pipes/translate.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
     FooterComponent,
-    CatGalleryComponent,
+    ItemsGalleryComponent,
     RegistrationComponent,
     TruncatePipe,
-    CatItemComponent,
+    SingleItemComponent,
     NotFoundComponent,
     ItemOpinionsComponent,
     ProfileComponent,
     ShoppingCartComponent,
     AddressDetailsComponent,
     HomePageComponent,
-    OrderSubmitComponent
+    OrderSubmitComponent,
+    SidebarNavigationComponent,
+    LoginModalComponent,
+    TranslatePipe
   ],
   imports: [
     BrowserModule,
     RoutingModule,
     FormsModule,
     FlashMessagesModule,
-    HttpModule
+    HttpModule,
+    NgbModule.forRoot()
   ],
-  providers: [ValidateService, AuthService, GalleryService, ShoppingService, OrderService],
+  providers: [
+    ValidateService,
+    AuthService,
+    GalleryService,
+    ShoppingService,
+    OrderService
+  ],
+  entryComponents: [LoginModalComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

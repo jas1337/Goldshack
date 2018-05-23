@@ -1,27 +1,24 @@
 <div class="my-3">
   <h2 class="text-center "> Order submition </h2>
-  <div class=" mb-5">
+  <div class="">
     <a [routerLink]="['/address-details']">
-      <button class="btn btn-outline-primary float-left" type="submit">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i> &ensp;Back
-      </button>
+      <i class="fa fa-arrow-left" aria-hidden="true"></i>
     </a>
   </div>
 </div>
 
 <div class="row my-5">
-  <div class="col-md-7 ">
-    <hr>
+  <div class="col-md-6 ">
     <h3>Items in cart</h3>
     <table class="table table-hover ">
       <tbody>
-        <tr *ngFor="let item of user.shoppingCart;let i = index">
-          <td style="width:120px">
+        <tr class="row py-3" *ngFor="let item of user.shoppingCart;let i = index">
+          <div class="col-4" style="width:120px">
             <a [routerLink]="['/item', item._id]">
               <img class="item-img-small" src="{{item.img}}">
             </a>
-          </td>
-          <td>
+          </div>
+          <div class="col-8">
             <h5>
               <strong>{{item.brand}}</strong>
             </h5>
@@ -31,13 +28,12 @@
             <h5>Quantity: x{{item.quantity}}</h5>
             <h4 *ngIf="!item.newPrice">{{item.price | currency:'PLN '}}</h4>
             <h4 class="red" *ngIf="item.newPrice"> {{item.newPrice | currency:'PLN '}}</h4>
-          </td>
+          </div>
         </tr>
       </tbody>
     </table>
   </div>
-  <div class="col-md-5">
-    <hr>
+  <div class="col-md-6">
     <h3>Delivery info</h3>
     <h5> {{user.firstName}} {{user.lastName}}</h5>
     <h5> {{lastAddress?.address}}</h5>
@@ -46,9 +42,8 @@
       <strong>{{lastAddress?.country}}</strong>
     </h5>
     <h2 class="mt-5 mb-3"> Total price : {{totalPrice| currency:'PLN '}} </h2>
-    <button class="btn btn-outline-primary" style="width:100%;" (click)="submitOrder()" type="submit">
-      Submit order&ensp;
-      <i class="fa fa-check" aria-hidden="true"></i>
+    <button class="btn btn-outline-success btn-block" (click)="submitOrder()" type="submit">
+      Submit order
     </button>
   </div>
 </div>

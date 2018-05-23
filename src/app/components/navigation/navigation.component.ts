@@ -3,15 +3,16 @@ import { NgClass } from '@angular/common';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
-import { AuthService } from '../../shared/services/auth.service';
+import { LoginModalComponent } from '../modals/login-modal/login-modal.component';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.css'],
-  // encapsulation: ViewEncapsulation.None
+  styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent implements OnInit {
 
@@ -25,22 +26,28 @@ export class NavigationComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private flashMessage: FlashMessagesService,
-    private router: Router
+    private router: Router,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit() {
   }
 
+  openModal() {
+    const modalRef = this.modalService.open(LoginModalComponent);
+    modalRef.componentInstance.name = 'World';
+  }
+
   onClick() {
-    this.isCollapsed = true
+    this.isCollapsed = true;
   }
 
   onLoginSubmit() {
 
-    let user = {
+    const user = {
       email: this.email,
       password: this.password,
-    }
+    };
 
     this.authService.authenticateUser(user).subscribe(data => {
       if (data.success) {

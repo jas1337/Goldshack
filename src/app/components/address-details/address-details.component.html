@@ -1,25 +1,17 @@
 <div class="my-3">
-
   <h2 class="text-center "> Delivery address </h2>
   <div class=" mb-5">
-
     <a [routerLink]="['/shopping-cart']">
-      <button class="btn btn-outline-primary float-left" type="submit">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i> &ensp;Back
-      </button>
+      <i class="fa fa-arrow-left" aria-hidden="true"></i>
     </a>
-    <a [routerLink]="['/order-submit']">
-      <button class="btn btn-outline-primary float-right" (click)="submitAddress()" [disabled]="addressForm.invalid" type="submit">
-        Next &ensp;
-        <i class="fa fa-arrow-right" aria-hidden="true"></i>
-      </button>
+    <a class="float-right" [routerLink]="['/order-submit']" disabled="addressForm.invalid">
+      <i class="fa fa-arrow-right" aria-hidden="true"></i>
     </a>
   </div>
 </div>
 
 <div class="row my-5">
   <div class="col-md-6">
-    <hr>
     <h3>Enter address</h3>
     <form #addressForm="ngForm">
       <div class="form-group">
@@ -41,7 +33,6 @@
     </form>
   </div>
   <div class="col-md-6">
-    <hr>
     <h3>Previously used addresses</h3>
     <h5 *ngIf="user.addressList?.length === 0"> There are no addresses yet</h5>
     <div class="row" *ngFor="let fullAddress of user.addressList;let i = index" (click)="setAddress(i)">

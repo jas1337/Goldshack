@@ -1,0 +1,31 @@
+<div class="modal-header">
+  <h4 class="modal-title">Log in</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body mx-5">
+  <p class="text-center">Welcome to Goldshack - a place where you can find everything your wardrobe needs.</p>
+  <form #loginForm="ngForm" (submit)="onLoginSubmit()">
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" [(ngModel)]="email" name="email" aria-describedby="emailHelp"
+        placeholder="Enter email">
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" class="form-control" id="exampleInputPassword1" [(ngModel)]="password" name="password" placeholder="Password">
+    </div>
+    <button type="submit" class="btn btn-outline-primary btn-block" [disabled]="loginForm.invalid">Log in</button>
+  </form>
+  <div class="form-group mt-4">
+    <h3 class="text-center">
+      Are You a new client?
+    </h3>
+    <button type="submit" class="btn btn-outline-success btn-block" (click)="goToRegisterPage()">Sign in</button>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+</div>
